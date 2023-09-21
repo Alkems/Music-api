@@ -7,5 +7,5 @@
 # How to run project
 1. Open node.js command prompt.
 2. Clone the repo.
-3. Type "Node." into the command node.js command prompt.
+3. Type "Node ." into the command node.js command prompt.
 4. Open your localhost.
