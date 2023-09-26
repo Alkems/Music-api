@@ -2,5 +2,32 @@
   "dependencies": {
     "express": "^4.18.2",
     "swagger-ui-express": "^5.0.0"
+  },
+
+  "scripts": {
+    "test": "echo \"Error: no test specificed\" && exit 1",
+    "start": "nodemon ."
+  },
+
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alkems/Music-api"
+  },
+
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Alkems/Music-api"
+  },
+  
+  "homepage": "https://github.com/Alkems/Music-api",
+
+  "directories": {
+    "doc": "docs"
+  },
+
+  "nodemonConfig":{
+    "ext": "js,json,html,yaml"
   }
 }
