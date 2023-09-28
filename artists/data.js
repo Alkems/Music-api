@@ -6,5 +6,9 @@ let data = [
 ]
 
 exports.getAll = () => {
-    return data.map(g => {return {"id":this.getAll.id,"name":this.getAll.name }})
+    return data.map(g=>{return{"id": g.id, "name": g.name}})
+}
+
+exports.getById = () => {
+    return data
 }
