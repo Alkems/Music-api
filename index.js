@@ -22,6 +22,16 @@ app.get("/artists/:id", (req,res)=>{
     res.send(artists.getById(req.params.id))
 })
 
+app.post('/artists',(req,res) => {
+    artists.push({
+        id: artists.length + 1,
+        name: req.body.name,
+        country: req.body.country
+    })
+
+    res.end()
+})
+
 app.get("/songs", (req,res)=>{
     res.send(songs.getAll())
 })
@@ -33,6 +43,17 @@ app.get("/songs/:id", (req,res)=>{
     }
     
     res.send(songs.getById(req.params.id))
+})
+
+app.post('/songs',(req,res) => {
+    songs.push({
+        id: songs.length + 1,
+        genre_id: req.body.genre_id,
+        name: req.body.name,
+        date_publised: req.body.date_publised
+    })
+
+    res.end()
 })
 
 
