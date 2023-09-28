@@ -1,3 +1,4 @@
+const { create } = require("domain")
 const express = require("express")
 const app = express()
 const port = 8080
@@ -26,12 +27,22 @@ app.get("/artists/:id", (req,res)=>{
 })
 
 app.post('/artists',(req,res) => {
-    artists.create({
+    if (!req.body.name || !req.body.country) {
+        return res.status(400).send({error: "One or all required parameters are missing"})
+    }
+
+    const createdArtist = artists.create({
         name: req.body.name,
         country: req.body.country
     })
-    res.end()
+    res.status(201)
+        .location(`${getBaseurl(req)}/artists/${createdArtist.id}`)
+        .send(createdArtist)
 })
+
+function getBaseurl (request) {
+    return (request.connection && request.connection.encrypted ? "https" : "http") + "://" + request.headers.host
+}
 
 app.get("/songs", (req,res)=>{
     res.send(songs.getAll())
@@ -47,13 +58,21 @@ app.get("/songs/:id", (req,res)=>{
 })
 
 app.post('/songs',(req,res) => {
-    songs.create({
-        name: res.body.name,
-        genre_id: res.body.genre_id,
-        date_uploaded: res.body.date_uploaded
+    if (!req.body.name || !req.body.date_published) {
+        return res.status(400).send({error: "One or all required parameters are missing"})
+    }
+
+    const createdSong = songs.create({
+        name: req.body.name,
+        genre_id: req.body.genre_id,
+        date_published: Date(req.body.date_published)
     })
-    res.end()
+
+    res.status(201)
+        .location(`${getBaseurl(req)}/songs/${createdSong.id}`)
+        .send(createdSong)
 })
+
 
 
 app.listen(port, ()=> {
