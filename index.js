@@ -3,11 +3,11 @@ const port = 8080
 const swaggerui = require("swagger-ui-express")
 //const swaggerDocument = require("./docs/swagger.json")
 const yamljs = require('yamljs')
-//const swaggerDocument = require("./docs/swagger.yaml")
+const swaggerDocument = yamljs.load("./docs/swagger.yaml")
 let artists = require("./artists/data")
 let songs = require("./songs/data")
 
-//app.use("/docs",swaggerui.serve,swaggerui.setup(swaggerDocument))
+app.use("/docs",swaggerui.serve,swaggerui.setup(swaggerDocument))
 
 app.get("/artists", (req,res)=>{
     res.send(artists.getAll())

@@ -1,31 +1,116 @@
-summary: Get by Id
-get:
-    tags:
-        - artists
-    responses:
-        '200':
-            content:
-                application/json:
-                    schema:
-                        type: array
-                        items:
-                            type: string
-                    examples:
-                        artists:
-                            value: |-
-                                let data = [
-                                    {id:1, name:"Alkem", country:"Estonia"}, 
-                                    {id:2, name:"Jadeci", country:"USA"},
-                                    {id:3, name:"Kanye West", country:"USA"},
-                                    {id:4, name:"Island Boys", country:"USA"},
-                                ]
-            description: Succesful
-        '404':
-            description: Artist not found.
-    summary: Get by Id
-    description: Return all details of artists by Id.
-parameters:
-    -
-        name: id
-        in: path
-        required: true
+openapi: 3.0.2
+info:
+    title: Music-API
+    version: 1.0.0
+    description: '### This for Music API'
+paths:
+    /artists:
+        get:
+            tags:
+                - artists
+            responses:
+                '200':
+                    content:
+                        Array of String as String:
+                            schema:
+                                $ref: '#/components/schemas/artist'
+                            examples:
+                                Artists:
+                                    value: |-
+                                        let data = [
+                                            {id:1, name:"Alkem", country:"Estonia"}, 
+                                            {id:2, name:"Jadeci", country:"USA"},
+                                            {id:3, name:"Kanye West", country:"USA"},
+                                            {id:4, name:"Island Boys", country:"USA"},
+                                        ]
+                    description: Return a list of artists.
+            summary: Get a list of all Artists
+            description: Returns a list of all artists.
+    '/artists/{id}':
+        summary: Get by Id
+        get:
+            tags:
+                - artists
+            parameters:
+                -
+                    name: id
+                    in: path
+                    required: true
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    type: string
+                            examples:
+                                artists:
+                                    value: |-
+                                        let data = [
+                                            {id:1, name:"Alkem", country:"Estonia"}, 
+                                            {id:2, name:"Jadeci", country:"USA"},
+                                            {id:3, name:"Kanye West", country:"USA"},
+                                            {id:4, name:"Island Boys", country:"USA"},
+                                        ]
+                    description: Succesful
+                '404':
+                    description: Artist not found.
+            operationId: id
+            summary: Get by Id
+            description: Return all details of artists by Id.
+        parameters:
+            -
+                name: id
+                in: path
+                required: true
+    /songs:
+        get:
+            tags:
+                - songs
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/song'
+                    description: song
+            summary: Get a list of songs
+            description: Returns a list of songs.
+components:
+    schemas:
+        error:
+            title: Root Type for error
+            description: 'Error, did not find artist.'
+            type: object
+            properties:
+                error:
+                    type: string
+            example:
+                error: Error message.
+        artist:
+            title: Root Type for artist
+            description: ''
+            type: object
+            properties:
+                id:
+                    format: int32
+                    type: integer
+                name:
+                    type: string
+                country:
+                    type: string
+            example:
+                id: 4
+                name: Island Boys
+                country: USA
+        song:
+            description: ''
+            type: object
+            example: |-
+                let data = [
+                    {id:1, genre_id:"0", name:"Gangnam style", date_published:Date(1/2/2022)}, 
+                    {id:2, genre_id:"0", name:"song", date_published:Date(20/12/2022)}, 
+                ]
