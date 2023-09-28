@@ -5,6 +5,7 @@ const swaggerui = require("swagger-ui-express")
 const yamljs = require('yamljs')
 const swaggerDocument = require("./docs/swagger.yaml")
 let artists = require("./artists/data")
+let artists = require("./songs/data")
 
 app.use("/docs",swaggerui.serve,swaggerui.setup(swaggerDocument))
 
@@ -16,6 +17,19 @@ app.get("/artists/:id", (req,res)=>{
     const foundThing = artists.getById(req.params.id)
     if(foundThing === undefined){
         return res.status(404).send({error: 'Artist not found'})
+    }
+    
+    res.send(artists.getById(req.params.id))
+})
+
+app.get("/songs", (req,res)=>{
+    res.send(artists.getAll())
+})
+
+app.get("/songs/:id", (req,res)=>{
+    const foundThing = artists.getById(req.params.id)
+    if(foundThing === undefined){
+        return res.status(404).send({error: 'Song not found'})
     }
     
     res.send(artists.getById(req.params.id))
