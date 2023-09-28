@@ -9,6 +9,6 @@ exports.getAll = () => {
     return data.map(g=>{return{"id": g.id, "name": g.name}})
 }
 
-exports.getById = () => {
-    return data
+exports.getById = (id) => {
+    return data.find((thing) => thing.id == parseInt(id))
 }

@@ -12,6 +12,8 @@ app.get("/artists", (req,res)=>{
 
 app.get("/artists/:id", (req,res)=>{
     res.send(artists.getById(req.params.id))
+    if (foundThing === undefined) return res.status(404).send({error: 'not found'})
+    res.send(artists.getById(req.params.id))
 })
 
 
