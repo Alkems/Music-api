@@ -1,4 +1,5 @@
-const app = require("express")()
+const express = require("express")
+const app = express()
 const port = 8080
 const swaggerui = require("swagger-ui-express")
 //const swaggerDocument = require("./docs/swagger.json")
@@ -6,6 +7,8 @@ const yamljs = require('yamljs')
 const swaggerDocument = yamljs.load("./docs/swagger.yaml")
 let artists = require("./artists/data")
 let songs = require("./songs/data")
+
+app.use(express.json())
 
 app.use("/docs",swaggerui.serve,swaggerui.setup(swaggerDocument))
 
@@ -23,12 +26,10 @@ app.get("/artists/:id", (req,res)=>{
 })
 
 app.post('/artists',(req,res) => {
-    artists.push({
-        id: artists.length + 1,
+    artists.create({
         name: req.body.name,
         country: req.body.country
     })
-
     res.end()
 })
 
@@ -46,13 +47,11 @@ app.get("/songs/:id", (req,res)=>{
 })
 
 app.post('/songs',(req,res) => {
-    songs.push({
-        id: songs.length + 1,
-        genre_id: req.body.genre_id,
-        name: req.body.name,
-        date_publised: req.body.date_publised
+    songs.create({
+        name: res.body.name,
+        genre_id: res.body.genre_id,
+        date_uploaded: res.body.date_uploaded
     })
-
     res.end()
 })
 

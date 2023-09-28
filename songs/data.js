@@ -10,3 +10,10 @@ exports.getAll = () => {
 exports.getById = (id) => {
     return data.find((thing) => thing.id == parseInt(id))
 }
+
+exports.create = (newSong) => {
+    const newId = Math.max(...data.map((thing) => thing.id)) + 1
+    newSong.id = newId
+    data.push(newSong)
+    return newSong
+}
