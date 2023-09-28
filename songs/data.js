@@ -1,8 +1,6 @@
 let data = [
-    {id:1, name:"Alkem", country:"Estonia"}, 
-    {id:2, name:"Jadeci", country:"USA"},
-    {id:3, name:"Kanye West", country:"USA"},
-    {id:4, name:"Island Boys", country:"USA"},
+    {id:1, genre_id:"0", name:"Gangnam style", date_published:Date(1/2/2022)}, 
+    {id:2, genre_id:"0", name:"song", date_published:Date(20/12/2022)}, 
 ]
 
 exports.getAll = () => {
