@@ -3,7 +3,7 @@ module.exports = (dbConnection, Sequelize)=>{
         id:{
             type: Sequelize.INT,
             primaryKey: true,
-            autoIncrement
+            autoIncrement: true
         },
         genre_id:{
             type: Sequelize.INT,

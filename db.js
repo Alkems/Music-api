@@ -20,6 +20,7 @@ const db = {}
 db.Sequelize = Sequelize
 db.connection = sequelize
 db.artists = require("./models/Artist")(sequelize,Sequelize)
+//db.songs = require("./models/Song")(sequelize,Sequelize)
 
 sync = async ()=>{
     //await sequelize.sync({force:true}) // Erase all and recreate 
