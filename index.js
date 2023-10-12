@@ -1,11 +1,35 @@
+require("dotenv").config()
 const { create } = require("domain")
 const express = require("express")
 const app = express()
-const port = 8080
+const port = process.env.PORT
 const swaggerui = require("swagger-ui-express")
 //const swaggerDocument = require("./docs/swagger.json")
 const yamljs = require('yamljs')
 const swaggerDocument = yamljs.load("./docs/swagger.yaml")
+
+const { Sequelize } = require('sequelize');
+const sequelize = new Sequelize(process.env.DATABASE, process.env.DB_USER, process.env.DB_PASSWORD, {
+  host: process.env.DB_HOST,
+  dialect: 'mariadb'
+});
+
+try {
+    sequelize.authenticate().then(()=>{
+        console.log('Connection has been established successfully.');
+    })
+} catch (error) {
+    console.error('Unable to connect to the database:', error);
+}
+
+
+
+
+
+
+
+
+
 let artists = require("./artists/data")
 let songs = require("./songs/data")
 
