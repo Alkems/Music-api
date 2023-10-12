@@ -19,7 +19,7 @@ app.use("/docs",swaggerui.serve,swaggerui.setup(swaggerDocument))
 require("./routes/artistRoutes")(app)
 
 app.listen(port, ()=> {
-    require("./db").sync().then(console.log("IT GOT SYNCED! \n"))
+    require("./db").sync().then(console.log("Synchronized succesfully\n"))
     .catch((error)=>console.log("Error:"+error))
     console.log(`API up at: http://localhost:${port}`);
     console.log(process.env.STARTUP_MSG)
