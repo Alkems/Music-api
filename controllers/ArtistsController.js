@@ -30,28 +30,27 @@ exports.getById = async (req, res) => {
 
 // UPDATE
 exports.editById = async (req, res) => {
-    const updateArtist = await artists.update({
-        name: req.body.name,
-        country: req.body.country
-    }, {
-        where: {id:req.body.id}
+    console.log("Update: ", req.params, req.body)
+    const updateResult = await artists.update({ ...req.body}, {
+        where: {id:req.body.id},
+        fields: ["name","country"]
     })
-    if (updatedArtist == null) {
-        return res.send({ "error": "artist not found" })
+    if (updateResult[0] == 0) {
+        return res.status(404).send({ error: "Artist not found" })
     }
 
-    res.status(201)
-        .location(`${getBaseurl(req)}/artists/${updateArtist.id}`)
-        .json(updatedArtist)
+    res.status(200)
+        .location(`${getBaseurl(req)}/artists/${req.params.id}`)
+        .send
 }
 
 // DELETE
 exports.deleteById = async (req, res) => {
-    const deleteArtist = await artists.destroy({
+    const deleteAmount = await artists.destroy({
         where: {id: int(req.params.id) } 
     })
 
-    if (deletedArtist === 0) {
+    if (deletedAmount === 0) {
         return res.status(404).send({ error: "Artist not found"})
     }
     res.status(204).send()

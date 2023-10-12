@@ -4,28 +4,6 @@ info:
     version: 1.0.0
     description: '### This for Music API'
 paths:
-    /artists:
-        get:
-            tags:
-                - artists
-            responses:
-                '200':
-                    content:
-                        Array of String as String:
-                            schema:
-                                $ref: '#/components/schemas/artist'
-                            examples:
-                                Artists:
-                                    value: |-
-                                        let data = [
-                                            {id:1, name:"Alkem", country:"Estonia"}, 
-                                            {id:2, name:"Jadeci", country:"USA"},
-                                            {id:3, name:"Kanye West", country:"USA"},
-                                            {id:4, name:"Island Boys", country:"USA"},
-                                        ]
-                    description: Return a list of artists.
-            summary: Get a list of all Artists
-            description: Returns a list of all artists.
     '/artists/{id}':
         summary: Get by Id
         get:
@@ -59,12 +37,29 @@ paths:
             operationId: id
             summary: Get by Id
             description: Return all details of artists by Id.
+        delete:
+            tags:
+                - artists
+            responses:
+                '204':
+                    description: Succeeded
+                '404':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                NotFound:
+                                    value:
+                                        error: Artist not found
+                    description: Artist not found
         parameters:
             -
                 name: id
                 in: path
                 required: true
     /songs:
+        summary: Handle single game by its id
         get:
             tags:
                 - songs
@@ -79,6 +74,58 @@ paths:
                     description: song
             summary: Get a list of songs
             description: Returns a list of songs.
+    /artists:
+        get:
+            tags:
+                - artists
+            responses:
+                '200':
+                    content:
+                        Array of String as String:
+                            schema:
+                                $ref: '#/components/schemas/artist'
+                            examples:
+                                Artists:
+                                    value: |-
+                                        let data = [
+                                            {id:1, name:"Alkem", country:"Estonia"}, 
+                                            {id:2, name:"Jadeci", country:"USA"},
+                                            {id:3, name:"Kanye West", country:"USA"},
+                                            {id:4, name:"Island Boys", country:"USA"},
+                                        ]
+                    description: Return a list of artists.
+            summary: Get a list of all Artists
+            description: Returns a list of all artists.
+        post:
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/artist'
+                        examples:
+                            NewArtist:
+                                value:
+                                    name: Jake Paul
+                                    country: London
+                required: true
+            tags:
+                - artists
+            responses:
+                '201':
+                    headers:
+                        location: {}
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/artist'
+                            examples:
+                                CreatedArtist:
+                                    value:
+                                        id: 3
+                                        name: Jake Paul
+                                        country: London
+                    description: Success
+            summary: Handle single game by its id
 components:
     schemas:
         error:
