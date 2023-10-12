@@ -46,8 +46,8 @@ exports.editById = async (req, res) => {
 
 // DELETE
 exports.deleteById = async (req, res) => {
-    const deleteAmount = await artists.destroy({
-        where: {id: int(req.params.id) } 
+    const deletedAmount = await artists.destroy({
+        where: {id: req.params.id } 
     })
 
     if (deletedAmount === 0) {
