@@ -36,6 +36,10 @@ exports.editById = async (req, res) => {
     }, {
         where: {id:req.body.id}
     })
+    if (updatedArtist == null) {
+        return res.send({ "error": "artist not found" })
+    }
+
     res.status(201)
         .location(`${getBaseurl(req)}/artists/${updateArtist.id}`)
         .json(updatedArtist)
@@ -44,7 +48,11 @@ exports.editById = async (req, res) => {
 // DELETE
 exports.deleteById = async (req, res) => {
     const deleteArtist = await artists.destroy({
-        where: {id:req.body.id}
+        where: {id: int(req.params.id) } 
     })
-    res.status(204)
+
+    if (deletedArtist === 0) {
+        return res.status(404).send({ error: "Artist not found"})
+    }
+    res.status(204).send()
 }
