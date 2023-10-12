@@ -22,4 +22,5 @@ app.listen(port, ()=> {
     require("./db").sync().then(console.log("IT GOT SYNCED! \n"))
     .catch((error)=>console.log("Error:"+error))
     console.log(`API up at: http://localhost:${port}`);
+    console.log(process.env.STARTUP_MSG)
 })
