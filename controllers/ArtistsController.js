@@ -16,25 +16,35 @@ exports.createNew = async (req, res) => {
 }
 // READ
 exports.getAll = async (req, res) => {
-    const result = await artists.findAll()
-    res.send(JSON.stringify(result))
+    const result = await artists.findAll({ attributes: ["id", "name", "country"] })
+    res.json(result)
 }
-exports.getById = (req, res) => {
-    const foundArtist = artists.getById(req.params.id)
-    if (foundArtist === undefined) {
+
+exports.getById = async (req, res) => {
+    const foundArtist = await artists.findByPk(req.params.id)
+    if (foundArtist === null) {
         return res.status(404).send({ error: 'Artist not found`'})
     }
     res.send(foundArtist)
 }
 
 // UPDATE
-exports.editById = (req, res) => {
+exports.editById = async (req, res) => {
+    const updateArtist = await artists.update({
+        name: req.body.name,
+        country: req.body.country
+    }, {
+        where: {id:req.body.id}
+    })
+    res.status(201)
+        .location(`${getBaseurl(req)}/artists/${updateArtist.id}`)
+        .json(updatedArtist)
 }
 
 // DELETE
-exports.deleteById = (req, res) => {
-    if (artists.delete(req.params.id) === undefined) {
-        return res.status(404).send({ error: "Artist not found" })
-    }
-    res.status(204).send()
+exports.deleteById = async (req, res) => {
+    const deleteArtist = await artists.destroy({
+        where: {id:req.body.id}
+    })
+    res.status(204)
 }
