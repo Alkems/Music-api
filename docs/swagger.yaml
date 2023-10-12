@@ -4,76 +4,6 @@ info:
     version: 1.0.0
     description: '### This for Music API'
 paths:
-    '/artists/{id}':
-        summary: Get by Id
-        get:
-            tags:
-                - artists
-            parameters:
-                -
-                    name: id
-                    in: path
-                    required: true
-            responses:
-                '200':
-                    content:
-                        application/json:
-                            schema:
-                                type: array
-                                items:
-                                    type: string
-                            examples:
-                                artists:
-                                    value: |-
-                                        let data = [
-                                            {id:1, name:"Alkem", country:"Estonia"}, 
-                                            {id:2, name:"Jadeci", country:"USA"},
-                                            {id:3, name:"Kanye West", country:"USA"},
-                                            {id:4, name:"Island Boys", country:"USA"},
-                                        ]
-                    description: Succesful
-                '404':
-                    description: Artist not found.
-            operationId: id
-            summary: Get by Id
-            description: Return all details of artists by Id.
-        delete:
-            tags:
-                - artists
-            responses:
-                '204':
-                    description: Succeeded
-                '404':
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/error'
-                            examples:
-                                NotFound:
-                                    value:
-                                        error: Artist not found
-                    description: Artist not found
-        parameters:
-            -
-                name: id
-                in: path
-                required: true
-    /songs:
-        summary: Handle single game by its id
-        get:
-            tags:
-                - songs
-            responses:
-                '200':
-                    content:
-                        application/json:
-                            schema:
-                                type: array
-                                items:
-                                    $ref: '#/components/schemas/song'
-                    description: song
-            summary: Get a list of songs
-            description: Returns a list of songs.
     /artists:
         get:
             tags:
@@ -125,7 +55,158 @@ paths:
                                         name: Jake Paul
                                         country: London
                     description: Success
-            summary: Handle single game by its id
+            summary: Add a new Artist
+    /songs:
+        get:
+            tags:
+                - songs
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/song'
+                    description: song
+            summary: Get a list of songs
+            description: Returns a list of songs.
+        post:
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/song'
+                        examples:
+                            NewArtist:
+                                value:
+                                    name: Viva La Vida
+                required: true
+            tags:
+                - songs
+            responses:
+                '201':
+                    headers:
+                        location: {}
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/song'
+                            examples:
+                                CreatedArtist:
+                                    value:
+                                        id: 1
+                                        name: Viva La Vida
+                    description: Success
+            summary: Add a new Song
+    '/artists/{id}':
+        get:
+            tags:
+                - artists
+            parameters:
+                -
+                    name: id
+                    in: path
+                    required: true
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    type: string
+                            examples:
+                                artists:
+                                    value: |-
+                                        let data = [
+                                            {id:1, name:"Alkem", country:"Estonia"}, 
+                                            {id:2, name:"Jadeci", country:"USA"},
+                                            {id:3, name:"Kanye West", country:"USA"},
+                                            {id:4, name:"Island Boys", country:"USA"},
+                                        ]
+                    description: Succesful
+                '404':
+                    description: Artist not found.
+            operationId: id
+            summary: Get by Id
+            description: Return all details of artists by Id.
+        delete:
+            tags:
+                - artists
+            responses:
+                '204':
+                    description: Succeeded
+                '404':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                NotFound:
+                                    value:
+                                        error: Artist not found
+                    description: Artist not found
+            summary: Delete by Id
+        parameters:
+            -
+                name: id
+                in: path
+                required: true
+    '/songs/{id}':
+        get:
+            tags:
+                - songs
+            parameters:
+                -
+                    name: id
+                    in: path
+                    required: true
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    type: string
+                            examples:
+                                songs:
+                                    value: |-
+                                        let data = [
+                                            {id:1, name:"Viva La Vida"}, 
+                                            {id:2, name:"In the end"},
+                                            {id:3, name:"Daylight"},
+                                            {id:4, name:"Megalovania"},
+                                        ]
+                    description: Succesful
+                '404':
+                    description: Song not found.
+            operationId: id
+            summary: Get by Id
+            description: Return all details of artists by Id.
+        delete:
+            tags:
+                - songs
+            responses:
+                '204':
+                    description: Succeeded
+                '404':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                NotFound:
+                                    value:
+                                        error: Song not found
+                    description: Song not found
+            summary: Delete by Id
+        parameters:
+            -
+                name: id
+                in: path
+                required: true
 components:
     schemas:
         error:
