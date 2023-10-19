@@ -20,7 +20,16 @@ const db = {}
 db.Sequelize = Sequelize
 db.connection = sequelize
 db.artists = require("./models/Artist")(sequelize,Sequelize)
-//db.songs = require("./models/Song")(sequelize,Sequelize)
+db.songs = require("./models/Song")(sequelize,Sequelize)
+db.artistSongs = require("./models/ArtistSong")(sequelize,Sequelize,db.artists,db.songs)
+
+db.artists.belongsToMany(db.songs, { through: db.artistSongs})
+db.songs.belongsToMany(db.artists, { through: db.artistSongs})
+db.artists.hasMany(db.artistSongs)
+db.songs.hasMany(db.artistSongs)
+db.artistSongs.belongsTo(db.artists)
+db.artistSongs.belongsTo(db.songs)
+
 
 sync = async ()=>{
     //await sequelize.sync({force:true}) // Erase all and recreate 

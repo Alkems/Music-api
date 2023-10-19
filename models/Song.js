@@ -1,12 +1,12 @@
 module.exports = (dbConnection, Sequelize)=>{
     const Song = dbConnection.define("Song",{
         id:{
-            type: Sequelize.INT,
+            type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
         genre_id:{
-            type: Sequelize.INT,
+            type: Sequelize.INTEGER,
         },
         name:{
             type: Sequelize.STRING,

@@ -17,6 +17,8 @@ app.use(express.json())
 app.use("/docs",swaggerui.serve,swaggerui.setup(swaggerDocument))
 
 require("./routes/artistRoutes")(app)
+require("./routes/songRoutes")(app)
+require("./routes/artistSongRoutes")(app)
 
 app.listen(port, ()=> {
     require("./db").sync().then(console.log("Synchronized succesfully\n"))

@@ -1,4 +1,4 @@
-const songsController = require("../controllers/songsController.js")
+const songsController = require("../controllers/SongsController.js")
 module.exports = (app) => {
     app.route("/songs")
         .get(songsController.getAll)
