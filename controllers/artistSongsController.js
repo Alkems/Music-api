@@ -1,5 +1,5 @@
 const { db } = require("../db")
-const artistSongs = db.artistSongs;
+const artistSongs = db.artistSongs
 const { getBaseurl } = require("./helpers")
 
 // Create
@@ -7,7 +7,7 @@ exports.createNew = async (req, res) => {
     if (!req.body.name) {
         return res.status(400).send({ error: "Required parameter 'name' is missing" })
     }
-    const createdArtist = await artists.create(req.body,{
+    const createdArtist = await artistSongs.create(req.body,{
         fields:["name","country"]
     })
     res.status(201)
@@ -16,22 +16,23 @@ exports.createNew = async (req, res) => {
 }
 // READ
 exports.getAll = async (req, res) => {
-    const result = await artistSongs.findAll({ include: { all: true, nested: true} })
+    const result = await artistSongs.findAll({
+        include: [db.songs, db.artists]
+    })
     res.json(result)
 }
-
 exports.getById = async (req, res) => {
-    const foundArtist = await artists.findByPk(req.params.id)
+    const foundArtist = await artistSongs.findByPk(req.params.id)
     if (foundArtist === null) {
-        return res.status(404).send({ error: 'Artist not found`'})
+        return res.status(404).send({ error: `Artist not found` })
     }
-    res.send(foundArtist)
+    res.json(foundArtist)
 }
 
 // UPDATE
 exports.editById = async (req, res) => {
     console.log("Update: ", req.params, req.body)
-    const updateResult = await artists.update({ ...req.body}, {
+    const updateResult = await artistSongs.update({ ...req.body}, {
         where: {id:req.body.id},
         fields: ["name","country"]
     })
@@ -46,7 +47,7 @@ exports.editById = async (req, res) => {
 
 // DELETE
 exports.deleteById = async (req, res) => {
-    const deletedAmount = await artists.destroy({
+    const deletedAmount = await artistSongs.destroy({
         where: {id: req.params.id } 
     })
 

@@ -68,6 +68,13 @@ paths:
                                 type: array
                                 items:
                                     $ref: '#/components/schemas/song'
+                            examples:
+                                Example:
+                                    value:
+                                        id: 1
+                                        name: Viva La Vida
+                                        genre_id: 1
+                                        date_published: 12-03-2023
                     description: song
             summary: Get a list of songs
             description: Returns a list of songs.
@@ -80,7 +87,11 @@ paths:
                         examples:
                             NewArtist:
                                 value:
-                                    name: Viva La Vida
+                                    id: 1
+                                    name: Jadeci
+                                    country: USA
+                                    genre_id: 1
+                                    date_published: (12/03/2023)
                 required: true
             tags:
                 - songs
@@ -97,6 +108,8 @@ paths:
                                     value:
                                         id: 1
                                         name: Viva La Vida
+                                        genre_id: 1
+                                        date_published: 12-03-2023
                     description: Success
             summary: Add a new Song
     '/songs/{id}':
@@ -120,10 +133,10 @@ paths:
                                 songs:
                                     value: |-
                                         let data = [
-                                            {id:1, name:"Viva La Vida"}, 
-                                            {id:2, name:"In the end"},
-                                            {id:3, name:"Daylight"},
-                                            {id:4, name:"Megalovania"},
+                                            {id:1, name:"Viva La Vida", genre_id:1, date_published:Date(20/12/2022)}, 
+                                            {id:2, name:"In the end", genre_id:1, date_published:Date(20/12/2022)},
+                                            {id:3, name:"Daylight", genre_id:1, date_published:Date(20/12/2022)},
+                                            {id:4, name:"Megalovania", genre_id:1, date_published:Date(20/12/2022)},
                                         ]
                     description: Succesful
                 '404':
@@ -131,6 +144,38 @@ paths:
             operationId: id
             summary: Get by Id
             description: Return all details of artists by Id.
+        put:
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/song'
+                        examples:
+                            Updated Song:
+                                value:
+                                    id: 32
+                                    name: Eminem2
+                required: true
+            tags:
+                - songs
+            responses:
+                '204':
+                    headers:
+                        Location:
+                            schema:
+                                type: string
+                    description: Success
+                '404':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                error:
+                                    value:
+                                        error: Song not found
+                    description: Success
+            summary: Update by Id
         delete:
             tags:
                 - songs
@@ -200,6 +245,13 @@ paths:
                 required: true
             tags:
                 - artists
+            parameters:
+                -
+                    name: id
+                    schema:
+                        type: integer
+                    in: path
+                    required: true
             responses:
                 '204':
                     headers:

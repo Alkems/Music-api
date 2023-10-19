@@ -16,7 +16,7 @@ exports.createNew = async (req, res) => {
 }
 // READ
 exports.getAll = async (req, res) => {
-    const result = await songs.findAll({ attributes: ["id", "name"] })
+    const result = await songs.findAll({ attributes: ["id", "name", "date_published", "genre_id"] })
     res.json(result)
 }
 

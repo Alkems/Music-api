@@ -34,6 +34,15 @@ db.artistSongs.belongsTo(db.songs)
 sync = async ()=>{
     //await sequelize.sync({force:true}) // Erase all and recreate 
     await sequelize.sync({alter:true}) // Alter existing to match the model
+    //await db.songs.findOrCreate({
+    //    where: { name: 'Jack Sparrow somg' },
+    //    defaults: {
+    //      name: 'Jack Sparrow somg',
+    //      Artists: {
+    //        name: 'Jack Sparrow'
+    //      }
+    //    }
+    //  });
 }
 
 module.exports = {
