@@ -87,11 +87,10 @@ paths:
                         examples:
                             NewArtist:
                                 value:
-                                    id: 1
                                     name: Jadeci
                                     country: USA
                                     genre_id: 1
-                                    date_published: (12/03/2023)
+                                    date_published: 12/03/2023
                 required: true
             tags:
                 - songs
