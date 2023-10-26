@@ -1,13 +1,17 @@
-module.exports = (dbConnection, Sequelize)=>{
+module.exports = (dbConnection, Sequelize, Genre)=>{
     const Song = dbConnection.define("Song",{
         id:{
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        genre_id:{
+        GenreId:{
             type: Sequelize.INTEGER,
-            //add references to genre model when genre is added
+            allowNull: false,
+            references: {
+                model: Genre,
+                key: "id"
+            }
         },
         name:{
             type: Sequelize.STRING,

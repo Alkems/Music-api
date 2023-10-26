@@ -7,8 +7,8 @@ exports.createNew = async (req, res) => {
     if (!req.body.name) {
         return res.status(400).send({ error: "Required parameter 'name' is missing" })
     }
-    if (!req.body.genre_id) {
-        return res.status(400).send({ error: "Required parameter 'genre_id' is missing" })
+    if (!req.body.GenreId) {
+        return res.status(400).send({ error: "Required parameter 'GenreId' is missing" })
     }
     if (!req.body.date_published) {
         return res.status(400).send({ error: "Required parameter 'date_published' is missing" })
@@ -16,7 +16,7 @@ exports.createNew = async (req, res) => {
 
 
     const createdSong = await songs.create(req.body,{
-        fields:["name", "genre_id", "date_published"]
+        fields:["name", "GenreId", "date_published"]
     })
     res.status(201)
         .location(`${getBaseurl(req)}/songs/${createdSong.id}`)
@@ -25,7 +25,9 @@ exports.createNew = async (req, res) => {
 
 // READ
 exports.getAll = async (req, res) => {
-    const result = await songs.findAll({ attributes: ["id", "name", "date_published", "genre_id"] })
+    const result = await songs.findAll({ 
+        include: [db.genres]
+    })
     res.json(result)
 }
 
