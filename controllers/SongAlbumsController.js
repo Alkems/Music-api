@@ -11,20 +11,21 @@ exports.createNew = async (req, res) => {
     if (!req.body.track_number) {
         return res.status(400).send({ error: "Required parameter 'track_number' is missing" })
     }
-    if (!req.body.songId) {
+    if (!req.body.SongId) {
         return res.status(400).send({ error: "Required parameter 'songId' is missing" })
     }
-    if (!req.body.albumId) {
+    if (!req.body.AlbumId) {
         return res.status(400).send({ error: "Required parameter 'albumId' is missing" })
     }
 
     const createdSongAlbum = await songAlbum.create(req.body,{
-        fields:["track_number", "songId", "albumId"]
+        fields:["track_number", "SongId", "AlbumId"]
     })
     res.status(201)
         .location(`${getBaseurl(req)}/songAlbums/${createdSongAlbum.id}`)
         .json(createdSongAlbum)
 }
+
 // READ
 exports.getAll = async (req, res) => {
     const result = await songAlbum.findAll({

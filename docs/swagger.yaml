@@ -73,7 +73,7 @@ paths:
                                     value:
                                         id: 1
                                         name: Viva La Vida
-                                        genre_id: 1
+                                        GenreId: 1
                                         date_published: 12-03-2023
                     description: song
             summary: Get a list of songs
@@ -89,7 +89,7 @@ paths:
                                 value:
                                     name: Jadeci
                                     country: USA
-                                    genre_id: 1
+                                    GenreId: 1
                                     date_published: 12/03/2023
                 required: true
             tags:
@@ -314,6 +314,12 @@ paths:
                     application/json:
                         schema:
                             $ref: '#/components/schemas/artistsong'
+                        examples:
+                            Artistsong:
+                                value:
+                                    ArtistId: 1
+                                    SongId: 1
+                                    role: Singer
                 required: true
             tags:
                 - artistsongs
@@ -665,6 +671,11 @@ paths:
                     application/json:
                         schema:
                             $ref: '#/components/schemas/songalbum'
+                        examples:
+                            Songalbum:
+                                    SongId: 1
+                                    AlbumId: 1
+                                    track_number: 1
                 required: true
             tags:
                 - songalbums
@@ -674,6 +685,12 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/songalbum'
+                            examples:
+                                Songalbum:
+                                    value:
+                                        SongId: 1
+                                        AlbumId: 1
+                                        track_number: 1
                     description: Success.
             summary: Add a new songalbum.
     '/songalbums/{id}':
@@ -787,11 +804,11 @@ components:
                 role:
                     description: ''
                     type: string
-                songid:
+                SongId:
                     format: int32
                     description: ''
                     type: integer
-                artistid:
+                ArtistId:
                     format: int32
                     description: ''
                     type: integer
@@ -830,7 +847,7 @@ components:
                     format: int32
                     description: ''
                     type: integer
-                songid:
+                SongId:
                     format: int32
                     description: ''
                     type: integer
@@ -838,7 +855,7 @@ components:
                     format: int32
                     description: ''
                     type: integer
-                albumId:
+                AlbumId:
                     format: int32
                     description: ''
                     type: integer

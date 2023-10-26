@@ -11,15 +11,15 @@ exports.createNew = async (req, res) => {
     if (!req.body.role) {
         return res.status(400).send({ error: "Required parameter 'role' is missing" })
     }
-    if (!req.body.songId) {
-        return res.status(400).send({ error: "Required parameter 'songId' is missing" })
+    if (!req.body.SongId) {
+        return res.status(400).send({ error: "Required parameter 'SongId' is missing" })
     }
-    if (!req.body.artistId) {
-        return res.status(400).send({ error: "Required parameter 'artistId' is missing" })
+    if (!req.body.ArtistId) {
+        return res.status(400).send({ error: "Required parameter 'ArtistId' is missing" })
     }
 
     const createdArtistSong = await artistSongs.create(req.body,{
-        fields:["role", "songId", "artistId"]
+        fields:["role", "SongId", "ArtistId"]
     })
     res.status(201)
         .location(`${getBaseurl(req)}/artistsongs/${createdArtistSong.id}`)
@@ -45,7 +45,7 @@ exports.editById = async (req, res) => {
     console.log("Update: ", req.params, req.body)
     const updateResult = await artistSongs.update({ ...req.body}, {
         where: {id:req.body.id},
-        fields: ["role", "songId", "artistId"]
+        fields: ["role", "SongId", "ArtistId"]
     })
     if (updateResult[0] == 0) {
         return res.status(404).send({ error: "ArtistSong not found" })
