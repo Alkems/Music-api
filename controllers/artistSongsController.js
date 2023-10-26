@@ -1,5 +1,5 @@
 const { db } = require("../db")
-const artistSongs = db.artistSongs
+const artistSongs = db.artistSong
 const { getBaseurl } = require("./helpers")
 
 

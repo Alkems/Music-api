@@ -16,6 +16,8 @@ require("./routes/artistRoutes")(app)
 require("./routes/songRoutes")(app)
 require("./routes/artistSongRoutes")(app)
 require("./routes/genreRoutes")(app)
+require("./routes/albumRoutes")(app)
+require("./routes/songAlbumRoutes")(app)
 
 app.listen(port, ()=> {
     require("./db").sync().then(console.log("Synchronized succesfully\n"))
