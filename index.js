@@ -8,10 +8,6 @@ const swaggerui = require("swagger-ui-express")
 const yamljs = require('yamljs')
 const swaggerDocument = yamljs.load("./docs/swagger.yaml")
 
-
-let artists = require("./artists/data")
-let songs = require("./songs/data")
-
 app.use(express.json())
 
 app.use("/docs",swaggerui.serve,swaggerui.setup(swaggerDocument))

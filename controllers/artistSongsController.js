@@ -22,11 +22,11 @@ exports.getAll = async (req, res) => {
     res.json(result)
 }
 exports.getById = async (req, res) => {
-    const foundArtist = await artistSongs.findByPk(req.params.id)
-    if (foundArtist === null) {
-        return res.status(404).send({ error: `Artist not found` })
+    const foundArtistSong = await artistSongs.findByPk(req.params.id)
+    if (foundArtistSong === null) {
+        return res.status(404).send({ error: `ArtistSong not found` })
     }
-    res.json(foundArtist)
+    res.json(foundArtistSong)
 }
 
 // UPDATE
