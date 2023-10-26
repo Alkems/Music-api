@@ -22,18 +22,26 @@ db.connection = sequelize
 db.artists = require("./models/Artist")(sequelize,Sequelize)
 db.genres = require("./models/Genre")(sequelize,Sequelize)
 db.songs = require("./models/Song")(sequelize,Sequelize, db.genres)
-db.artistSongs = require("./models/ArtistSong")(sequelize,Sequelize,db.artists,db.songs)
+db.artistSong = require("./models/ArtistSong")(sequelize,Sequelize,db.artists,db.songs)
+db.albums = require("./models/Album")(sequelize,Sequelize)
+db.songAlbum = require("./models/SongAlbum")(sequelize,Sequelize,db.songs,db.albums)
 
-db.artists.belongsToMany(db.songs, { through: db.artistSongs})
-db.songs.belongsToMany(db.artists, { through: db.artistSongs})
-db.artists.hasMany(db.artistSongs)
-db.songs.hasMany(db.artistSongs)
-db.artistSongs.belongsTo(db.artists)
-db.artistSongs.belongsTo(db.songs)
+db.artists.belongsToMany(db.songs, { through: db.artistSong})
+db.songs.belongsToMany(db.artists, { through: db.artistSong})
+db.artists.hasMany(db.artistSong)
+db.songs.hasMany(db.artistSong)
+db.artistSong.belongsTo(db.artists)
+db.artistSong.belongsTo(db.songs)
 
 db.songs.belongsTo(db.genres)
 db.genres.hasMany(db.songs)
 
+db.songs.belongsToMany(db.albums, { through: db.songAlbum})
+db.albums.belongsToMany(db.songs, { through: db.songAlbum})
+db.songs.hasMany(db.songAlbum)
+db.albums.hasMany(db.songAlbum)
+db.songAlbum.belongsTo(db.songs)
+db.songAlbum.belongsTo(db.albums)
 
 
 sync = async ()=>{
@@ -55,7 +63,6 @@ sync = async ()=>{
                 country: "USA",
             }
         })
-        console.log("artist created: ", createdA)
 
         const [genre, createdG] = await db.genres.findOrCreate({
             where: {
@@ -65,8 +72,6 @@ sync = async ()=>{
                 name: "Rock"
             }
         })
-
-        console.log("genre created: ", createdG)
 
         const [song, createdS] = await db.songs.findOrCreate({
             where: {
@@ -79,9 +84,18 @@ sync = async ()=>{
             }
         })
 
-        console.log("song created: ", createdS)
+        const [song2, createdS2] = await db.songs.findOrCreate({
+            where: {
+                name: "The Pretender"
+            },
+            defaults: {
+                name: "The Pretender",
+                date_published: new Date(),
+                GenreId: genre.id
+            }
+        })
 
-        const [artistSong, createdAS] = await db.artistSongs.findOrCreate({
+        const [artistSong, createdAS] = await db.artistSong.findOrCreate({
             where: {
                 SongId: song.id,
                 ArtistId: artist.id
@@ -89,11 +103,56 @@ sync = async ()=>{
             defaults: {
                 SongId: song.id,
                 ArtistId: artist.id,
-                role: "Drums"
+                role: "Singer"
             }
         })
 
-        console.log("artistSong created: ", createdAS)
+        const [artistSong2, createdAS2] = await db.artistSong.findOrCreate({
+            where: {
+                SongId: song2.id,
+                ArtistId: artist.id
+            },
+            defaults: {
+                SongId: song2.id,
+                ArtistId: artist.id,
+                role: "Singer"
+            }
+        })
+
+        const [album, createdAl] = await db.albums.findOrCreate({
+            where: {
+                name: "Echoes, Silence, Patience & Grace"
+            },
+            defaults: {
+                name: "Echoes, Silence, Patience & Grace",
+                date_published: new Date(),
+            }
+        })
+
+
+        const [songAlbum, createdSA] = await db.songAlbum.findOrCreate({
+            where: {
+                SongId: song.id,
+                AlbumId: album.id
+            },
+            defaults: {
+                SongId: song.id,
+                AlbumId: album.id,
+                track_number: 1
+            }
+        })
+
+        const [songAlbum2, createdSA2] = await db.songAlbum.findOrCreate({
+            where: {
+                SongId: song2.id,
+                AlbumId: album.id
+            },
+            defaults: {
+                SongId: song2.id,
+                AlbumId: album.id,
+                track_number: 2
+            }
+        })
 
     }
     else {
