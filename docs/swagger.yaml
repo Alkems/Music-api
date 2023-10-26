@@ -153,7 +153,9 @@ paths:
                             Updated Song:
                                 value:
                                     id: 32
-                                    name: Eminem2
+                                    name: Rap god
+                                    date_published: 12-03-2023
+                                    genre_id: 1
                 required: true
             tags:
                 - songs
