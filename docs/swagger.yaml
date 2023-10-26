@@ -673,6 +673,7 @@ paths:
                             $ref: '#/components/schemas/songalbum'
                         examples:
                             Songalbum:
+                                value:
                                     SongId: 1
                                     AlbumId: 1
                                     track_number: 1
