@@ -380,53 +380,6 @@ paths:
                 name: id
                 in: path
                 required: true
-    /album:
-        get:
-            tags:
-                - album
-            responses:
-                '200':
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/album'
-                            examples:
-                                Albums:
-                                    value: |-
-                                        let data = [
-                                            {id:1, name:"Hot Dogs fight back"}, 
-                                            {id:2, name:"Gang up"},
-                                            {id:3, name:"Wild Burgers"},
-                                        ]
-                    description: Return a list of albums.
-            summary: Get a list of albums.
-            description: Returns a list of albums.
-        post:
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/album'
-                        examples:
-                            Album:
-                                value:
-                                    name: Bankai
-                required: true
-            tags:
-                - album
-            responses:
-                '201':
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/album'
-                            examples:
-                                Album:
-                                    value:
-                                        id: 3
-                                        name: Centuries of Edging
-                    description: Success.
-            summary: Add a new album.
     /genres:
         get:
             tags:
@@ -488,7 +441,8 @@ paths:
                         application/json:
                             schema:
                                 type: array
-                                items: {}
+                                items:
+                                    type: string
                             examples:
                                 genres:
                                     value: |-
@@ -530,8 +484,8 @@ paths:
                                 Genre:
                                     value: |-
                                         let data = [
-                                            {id:1, name:"Edge"}, 
-                                            {id:2, name:"Punking"}
+                                            {id:1, name:"Hyperpop"}, 
+                                            {id:2, name:"Rap"}
                                         ]
                     description: Success.
                 '404':
@@ -558,6 +512,237 @@ paths:
                                     value:
                                         error: Genre not found
                     description: Genre not found.
+            summary: Delete by Id.
+    /albums:
+        get:
+            tags:
+                - albums
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/album'
+                            examples:
+                                Albums:
+                                    value: |-
+                                        let data = [
+                                            {id:1, name:"Hot Dogs fight back"}, 
+                                            {id:2, name:"Gang up"},
+                                            {id:3, name:"Wild Burgers"},
+                                        ]
+                    description: Return a list of albums.
+            summary: Get a list of albums.
+            description: Returns a list of albums.
+        post:
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/album'
+                        examples:
+                            Album:
+                                value:
+                                    name: Bankai
+                required: true
+            tags:
+                - albums
+            responses:
+                '201':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/album'
+                            examples:
+                                Album:
+                                    value:
+                                        id: 3
+                                        name: Centuries of Edging
+                    description: Success.
+            summary: Add a new album.
+    '/albums/{id}':
+        summary: Delete by Id.
+        get:
+            tags:
+                - albums
+            parameters:
+                -
+                    name: id
+                    in: path
+                    required: true
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    type: string
+                            examples:
+                                Albums:
+                                    value: |-
+                                        let data = [
+                                            {id:1, name:"Edging"}, 
+                                            {id:2, name:"Hot wheels"}
+                                        ]
+                    description: Get Album by Id.
+                '404':
+                    description: Album not found.
+            summary: Get by Id.
+        put:
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: string
+                        examples:
+                            Album:
+                                value: |-
+                                    let data = [
+                                        {id:1, name:"Edge"}, 
+                                        {id:2, name:"Punking"}
+                                    ]
+                required: true
+            tags:
+                - albums
+            parameters:
+                -
+                    name: id
+                    in: path
+                    required: true
+            responses:
+                '204':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/album'
+                            examples:
+                                Album:
+                                    value: |-
+                                        let data = [
+                                            {id:1, name:"Edging"}, 
+                                            {id:2, name:"Fireworks"}
+                                        ]
+                    description: Update by Id.
+                '404':
+                    description: Album not found.
+            summary: Update by Id.
+        delete:
+            tags:
+                - albums
+            parameters:
+                -
+                    name: id
+                    in: path
+                    required: true
+            responses:
+                '204':
+                    description: Delete by Id.
+                '404':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                AlbumDelete:
+                                    value:
+                                        error: Album not found
+                    description: Album not found.
+    /songalbums:
+        get:
+            tags:
+                - songalbums
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    type: string
+                    description: Return a list of songalbums.
+            summary: Get a list of all songalbums.
+            description: Return a list of songalbums.
+        post:
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/songalbum'
+                required: true
+            tags:
+                - songalbums
+            responses:
+                '201':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/songalbum'
+                    description: Success.
+            summary: Add a new songalbum.
+    '/songalbums/{id}':
+        get:
+            tags:
+                - songalbums
+            parameters:
+                -
+                    name: id
+                    in: path
+                    required: true
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    type: string
+                    description: Get by Id.
+                '404':
+                    description: Songalbum not found.
+            summary: Get by Id.
+        put:
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/songalbum'
+                required: true
+            tags:
+                - songalbums
+            parameters:
+                -
+                    name: id
+                    in: path
+                    required: true
+            responses:
+                '204':
+                    description: Success.
+                '404':
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    type: string
+                    description: Not found.
+            summary: Update by Id.
+        delete:
+            tags:
+                - songalbums
+            parameters:
+                -
+                    name: id
+                    in: path
+                    required: true
+            responses:
+                '204':
+                    description: Delete songalbum by Id.
+                '404':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
             summary: Delete by Id.
 components:
     schemas:
@@ -641,3 +826,19 @@ components:
                 name:
                     description: ''
                     type: string
+        songalbum:
+            description: ''
+            type: object
+            properties:
+                id:
+                    format: int32
+                    description: ''
+                    type: integer
+                songid:
+                    format: int32
+                    description: ''
+                    type: integer
+                tracknumber:
+                    format: int32
+                    description: ''
+                    type: integer
