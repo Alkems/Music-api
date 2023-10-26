@@ -55,6 +55,8 @@ paths:
                                         name: Jake Paul
                                         country: London
                     description: Success
+                '400':
+                    description: Empty body
             summary: Add a new Artist
     /songs:
         get:
@@ -110,6 +112,8 @@ paths:
                                         genre_id: 1
                                         date_published: 12-03-2023
                     description: Success
+                '400':
+                    description: Empty body
             summary: Add a new Song
     '/songs/{id}':
         get:

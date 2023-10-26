@@ -2,17 +2,28 @@ const { db } = require("../db")
 const artistSongs = db.artistSongs
 const { getBaseurl } = require("./helpers")
 
+
+// id, role, songId, artistId
+
 // Create
 exports.createNew = async (req, res) => {
-    if (!req.body.name) {
-        return res.status(400).send({ error: "Required parameter 'name' is missing" })
+
+    if (!req.body.role) {
+        return res.status(400).send({ error: "Required parameter 'role' is missing" })
     }
-    const createdArtist = await artistSongs.create(req.body,{
-        fields:["name","country"]
+    if (!req.body.songId) {
+        return res.status(400).send({ error: "Required parameter 'songId' is missing" })
+    }
+    if (!req.body.artistId) {
+        return res.status(400).send({ error: "Required parameter 'artistId' is missing" })
+    }
+
+    const createdArtistSong = await artistSongs.create(req.body,{
+        fields:["role", "songId", "artistId"]
     })
     res.status(201)
-        .location(`${getBaseurl(req)}/artists/${createdArtist.id}`)
-        .json(createdArtist)
+        .location(`${getBaseurl(req)}/artistsongs/${createdArtistSong.id}`)
+        .json(createdArtistSong)
 }
 // READ
 exports.getAll = async (req, res) => {
@@ -34,14 +45,14 @@ exports.editById = async (req, res) => {
     console.log("Update: ", req.params, req.body)
     const updateResult = await artistSongs.update({ ...req.body}, {
         where: {id:req.body.id},
-        fields: ["name","country"]
+        fields: ["role", "songId", "artistId"]
     })
     if (updateResult[0] == 0) {
-        return res.status(404).send({ error: "Artist not found" })
+        return res.status(404).send({ error: "ArtistSong not found" })
     }
 
     res.status(200)
-        .location(`${getBaseurl(req)}/artists/${req.params.id}`)
+        .location(`${getBaseurl(req)}/artistsongs/${req.params.id}`)
         .send
 }
 
@@ -52,7 +63,7 @@ exports.deleteById = async (req, res) => {
     })
 
     if (deletedAmount === 0) {
-        return res.status(404).send({ error: "Artist not found"})
+        return res.status(404).send({ error: "ArtistSong not found"})
     }
     res.status(204).send()
 }

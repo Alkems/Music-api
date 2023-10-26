@@ -50,7 +50,7 @@ exports.editById = async (req, res) => {
 
     res.status(200)
         .location(`${getBaseurl(req)}/songs/${req.params.id}`)
-        .send
+        .send()
 }
 
 // DELETE
@@ -62,5 +62,6 @@ exports.deleteById = async (req, res) => {
     if (deletedAmount === 0) {
         return res.status(404).send({ error: "Song not found"})
     }
+
     res.status(204).send()
 }

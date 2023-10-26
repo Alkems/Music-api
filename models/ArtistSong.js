@@ -9,7 +9,7 @@ module.exports = (dbConnection, Sequelize, Artist, Song)=>{
             type: Sequelize.STRING,
             allowNull: false
         },
-        SongId: {
+        songId: {
             type: Sequelize.INTEGER,
             allowNull: false,
             references: {
@@ -17,7 +17,7 @@ module.exports = (dbConnection, Sequelize, Artist, Song)=>{
                 key: "id"
             }
         },
-        ArtistId: {
+        artistId: {
             type: Sequelize.INTEGER,
             allowNull: false,
             references: {

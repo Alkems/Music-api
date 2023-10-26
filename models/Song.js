@@ -7,6 +7,7 @@ module.exports = (dbConnection, Sequelize)=>{
         },
         genre_id:{
             type: Sequelize.INTEGER,
+            //add references to genre model when genre is added
         },
         name:{
             type: Sequelize.STRING,
