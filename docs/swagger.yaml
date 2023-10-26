@@ -597,11 +597,9 @@ paths:
                             type: string
                         examples:
                             Album:
-                                value: |-
-                                    let data = [
-                                        {id:1, name:"Edge"}, 
-                                        {id:2, name:"Punking"}
-                                    ]
+                                value:
+                                    id: 1
+                                    name: Edge
                 required: true
             tags:
                 - albums
@@ -617,12 +615,10 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/album'
                             examples:
-                                Album:
-                                    value: |-
-                                        let data = [
-                                            {id:1, name:"Edging"}, 
-                                            {id:2, name:"Fireworks"}
-                                        ]
+                                example:
+                                    value:
+                                        id: 1
+                                        name: Edge
                     description: Update by Id.
                 '404':
                     description: Album not found.
@@ -838,7 +834,11 @@ components:
                     format: int32
                     description: ''
                     type: integer
-                tracknumber:
+                track_number:
+                    format: int32
+                    description: ''
+                    type: integer
+                albumId:
                     format: int32
                     description: ''
                     type: integer
