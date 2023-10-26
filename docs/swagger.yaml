@@ -55,8 +55,6 @@ paths:
                                         name: Jake Paul
                                         country: London
                     description: Success
-                '400':
-                    description: Empty body
             summary: Add a new Artist
     /songs:
         get:
@@ -112,8 +110,6 @@ paths:
                                         genre_id: 1
                                         date_published: 12-03-2023
                     description: Success
-                '400':
-                    description: Empty body
             summary: Add a new Song
     '/songs/{id}':
         get:
@@ -297,6 +293,272 @@ paths:
                 name: id
                 in: path
                 required: true
+    /artistsongs:
+        get:
+            tags:
+                - artistsongs
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/artistsong'
+                    description: Artistsong.
+            summary: Get a list of ArtistSongs.
+            description: Return a list of artistsongs.
+        post:
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/artistsong'
+                required: true
+            tags:
+                - artistsongs
+            responses:
+                '201':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/artistsong'
+                    description: Success.
+            summary: Add a new Artistsong.
+    '/artistsongs/{id}':
+        get:
+            tags:
+                - artistsongs
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    type: string
+                    description: ' Succesful.'
+                '404':
+                    description: Artistsong not found.
+            summary: Get by Id.
+        put:
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/artistsong'
+                required: true
+            tags:
+                - artistsongs
+            responses:
+                '204':
+                    description: Success.
+                '404':
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    type: string
+                    description: Artistsong not found.
+            summary: Update by Id.
+        delete:
+            tags:
+                - artistsongs
+            responses:
+                '204':
+                    description: Success.
+                '404':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                    description: Artistsong not found.
+            summary: Delete by Id.
+        parameters:
+            -
+                name: id
+                in: path
+                required: true
+    /album:
+        get:
+            tags:
+                - album
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/album'
+                            examples:
+                                Albums:
+                                    value: |-
+                                        let data = [
+                                            {id:1, name:"Hot Dogs fight back"}, 
+                                            {id:2, name:"Gang up"},
+                                            {id:3, name:"Wild Burgers"},
+                                        ]
+                    description: Return a list of albums.
+            summary: Get a list of albums.
+            description: Returns a list of albums.
+        post:
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/album'
+                        examples:
+                            Album:
+                                value:
+                                    name: Bankai
+                required: true
+            tags:
+                - album
+            responses:
+                '201':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/album'
+                            examples:
+                                Album:
+                                    value:
+                                        id: 3
+                                        name: Centuries of Edging
+                    description: Success.
+            summary: Add a new album.
+    /genres:
+        get:
+            tags:
+                - genres
+            responses:
+                '200':
+                    content:
+                        Array of String as String:
+                            schema:
+                                $ref: '#/components/schemas/genre'
+                            examples:
+                                Genre:
+                                    value: |-
+                                        let data = [
+                                            {id:1, name:"Hip-Hop"}, 
+                                            {id:2, name:"Rap"}, 
+                                        ]
+                    description: Return a list of genres.
+            summary: Get a list of all genres.
+            description: Returns a list of all genres.
+        post:
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/genre'
+                        examples:
+                            New genre:
+                                value:
+                                    name: Hyperpop
+                required: true
+            tags:
+                - genres
+            responses:
+                '201':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/genre'
+                            examples:
+                                CreatedGenre:
+                                    value:
+                                        id: 1
+                                        name: Hyperpop
+                    description: Add a new genre.
+            summary: Add a new genre.
+    '/genres/{id}':
+        get:
+            tags:
+                - genres
+            parameters:
+                -
+                    name: id
+                    in: path
+                    required: true
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items: {}
+                            examples:
+                                genres:
+                                    value: |-
+                                        let data = [
+                                            {id:1, name:"Rap"}, 
+                                            {id:2, name:"Hip-Hop"}
+                                        ]
+                    description: Success.
+                '404':
+                    description: Genre not found.
+            summary: Get by Id.
+            description: Returns a list of genres by id.
+        put:
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: string
+                        examples:
+                            Genre:
+                                value:
+                                    id: 1
+                                    name: Edge
+                required: true
+            tags:
+                - genres
+            parameters:
+                -
+                    name: id
+                    in: path
+                    required: true
+            responses:
+                '204':
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+                            examples:
+                                Genre:
+                                    value: |-
+                                        let data = [
+                                            {id:1, name:"Edge"}, 
+                                            {id:2, name:"Punking"}
+                                        ]
+                    description: Success.
+                '404':
+                    description: Genre not found.
+            summary: Update by Id.
+        delete:
+            tags:
+                - genres
+            parameters:
+                -
+                    name: id
+                    in: path
+                    required: true
+            responses:
+                '204':
+                    description: Success.
+                '404':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                Error:
+                                    value:
+                                        error: Genre not found
+                    description: Genre not found.
+            summary: Delete by Id.
 components:
     schemas:
         error:
@@ -332,3 +594,50 @@ components:
                     {id:1, genre_id:"0", name:"Gangnam style", date_published:Date(1/2/2022)}, 
                     {id:2, genre_id:"0", name:"song", date_published:Date(20/12/2022)}, 
                 ]
+        artistsong:
+            description: ''
+            required: []
+            type: object
+            properties:
+                id:
+                    format: int32
+                    description: ''
+                    type: integer
+                role:
+                    description: ''
+                    type: string
+                songid:
+                    format: int32
+                    description: ''
+                    type: integer
+                artistid:
+                    format: int32
+                    description: ''
+                    type: integer
+        genre:
+            description: ''
+            type: object
+            properties:
+                id:
+                    format: int32
+                    description: ''
+                    type: integer
+                name:
+                    description: ''
+                    type: string
+            example: |-
+                let data = [
+                    {id:1, name:"Hip-Hop"}, 
+                    {id:2, name:"Rap"}, 
+                ]
+        album:
+            description: ''
+            type: object
+            properties:
+                id:
+                    format: int32
+                    description: ''
+                    type: integer
+                name:
+                    description: ''
+                    type: string
