@@ -1,6 +1,7 @@
 require("dotenv").config()
 const { create } = require("domain")
 const express = require("express")
+const cors = require("cors")
 const app = express()
 const port = process.env.PORT
 const swaggerui = require("swagger-ui-express")
@@ -9,7 +10,7 @@ const yamljs = require('yamljs')
 const swaggerDocument = yamljs.load("./docs/swagger.yaml")
 
 app.use(express.json())
-
+app.use(cors())
 app.use("/docs",swaggerui.serve,swaggerui.setup(swaggerDocument))
 
 require("./routes/artistRoutes")(app)

@@ -27,13 +27,13 @@
 const app = Vue.createApp({
   data() {
     return {
-      artists: [
-            {id:1, name:"Jadeci", country:"USA"},
-            {id:2, name:"Alkem", country:"Estonia"}
-        ]
+      artists: []
     }
+  },
+  async created() {
+    this.artists = await (await fetch("http://localhost:8080/artists")).json();
   }
-}).mount('#app')
+}).mount("#app")
 
 </script>
 </body>
