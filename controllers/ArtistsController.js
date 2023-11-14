@@ -41,7 +41,7 @@ exports.editById = async (req, res) => {
 
     res.status(200)
         .location(`${getBaseurl(req)}/artists/${req.params.id}`)
-        .send
+        .send()
 }
 
 // DELETE

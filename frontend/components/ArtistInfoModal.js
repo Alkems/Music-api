@@ -27,18 +27,19 @@ export default {
             </div>
             <div class="modal-footer">
                 <template v-if="isEditing">
-                    <button v-if="isEditing" type="button" class="btn btn-success" @click="saveModifiedArtist">Save</button>
-                    <button v-if="isEditing" type="button" class="btn btn-secondary" @click="cancelEditing">Cancel</button>
+                    <button type="button" class="btn btn-success" @click="saveModifiedArtist">Save</button>
+                    <button type="button" class="btn btn-secondary" @click="cancelEditing">Cancel</button>
                 </template>
                 <template v-else>
-                    <button v-else type="button" class="btn btn-primary" @click="startEditing">Edit</button>
-                    <button v-else type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" @click="startEditing">Edit</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </template>
             </div>
         </div>
     </div>
 </div>
     `,
+    emits:["artistUpdated"],
     props: {
         artistInModal: {}
     },
@@ -56,9 +57,19 @@ export default {
         cancelEditing(){
             this.isEditing = false
         },
-        saveModifiedArtist(){
-            //send post to save modified artist
-            
+        async saveModifiedArtist(){
+            console.log("Saving:", this.modifiedArtist)
+            const rawResponse = await fetch(this.API_URL + "/artists/" + this.modifiedArtist.id, {
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(this.modifiedArtist)
+            });
+            console.log(rawResponse);
+            this.$emit("artistUpdated", this.modifiedArtist)
+            this.isEditing = false
         }
     }
 }

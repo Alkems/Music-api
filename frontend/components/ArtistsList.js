@@ -12,25 +12,19 @@ export default {
         </tr>
     </table>
     `,
-    emits: {
-        showModal: (artist) => {
-            console.log("Validation", artist)
-            return artist.id && artist.name && artist.country
-        }
-    },
+    emits: ["showModal"],
     data() {
         return {
             artists: []
         }
     },
     async created() {
-        this.artists = await (await fetch("http://localhost:8080/artists")).json()
+        this.artists = await (await fetch(this.API_URL + "/artists")).json()
     },
     methods: {
         getArtist: async function (id) {
-            const artistInModal = await (await fetch("http://localhost:8080/artists/" + id)).json()
-            console.log("artistsList: ", artistInModal)
-            this.$emit("showModal", artistInModal)
-        }
+            const artistinModal = await (await fetch(this.API_URL + "/artists/" + id)).json()
+            this.$emit("showModal", artistinModal)
+        },
     }
 }
