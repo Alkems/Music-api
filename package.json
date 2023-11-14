@@ -7,6 +7,7 @@
     "mysql2": "^3.6.1",
     "sequelize": "^6.33.0",
     "swagger-ui-express": "^5.0.0",
+    "vue": "^3.3.8",
     "yamljs": "^0.3.0"
   },
   "scripts": {
