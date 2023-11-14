@@ -7,7 +7,7 @@ export default {
             <th>Country</th>
         </tr>
         <tr v-for="artist in artists">
-            <td @click="getartist(artist.id)">{{ artist.name }}</td>
+            <td @click="getArtist(artist.id)">{{ artist.name }}</td>
             <td>{{ artist.country }}</td>
         </tr>
     </table>
