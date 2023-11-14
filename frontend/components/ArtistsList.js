@@ -27,7 +27,7 @@ export default {
         this.artists = await (await fetch("http://localhost:8080/artists")).json()
     },
     methods: {
-        getartist: async function (id) {
+        getArtist: async function (id) {
             const artistInModal = await (await fetch("http://localhost:8080/artists/" + id)).json()
             console.log("artistsList: ", artistInModal)
             this.$emit("showModal", artistInModal)
