@@ -45,7 +45,7 @@ db.songAlbum.belongsTo(db.albums)
 
 
 sync = async ()=>{
-    if (process.env.DROP_DB) {
+    if (process.env.DROP_DB === "true") {
         console.log("Begin DROP")
         await db.connection.query('SET FOREIGN_KEY_CHECKS = 0')
         console.log("Checks disabled")
