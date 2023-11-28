@@ -14,13 +14,13 @@ export default {
     data() {
         return {
             update: 0,
-            songAlbumInModal: { id: "", role: "", SongId: "", ArtistId: "" },
+            songAlbumInModal: { id: "", track_number: "", SongId: "", AlbumId: "" },
         }
     },
     methods: {
         openModal(songalbum) {
-            this.songAlbumInfoModal = songalbum
-            let songAlbumInfoModal = new bootstrap.Modal(document.getElementById("songAlbumInfoModal"))
+            this.songAlbumInModal = songalbum
+            let songAlbumInfoModal = new bootstrap.Modal(document.getElementById("songalbumInfoModal"))
             songAlbumInfoModal.show()
         },
         updateView(songalbum){

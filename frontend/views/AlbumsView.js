@@ -5,7 +5,7 @@ export default {
     template: `
     <h2>Albums</h2>
     <albums-list :key="update" @showModal="openModal"></albums-list>
-    <album-info-modal @songUpdated="updateView" :albumInModal="albumInModal"></album-info-modal>
+    <album-info-modal @albumUpdated="updateView" :albumInModal="albumInModal"></album-info-modal>
     `,
     components: {
         albumsList: albumsList,

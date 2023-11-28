@@ -5,7 +5,7 @@ export default {
     template: `
     <h2>Genres</h2>
     <genres-list :key="update" @showModal="openModal"></genres-list>
-    <genre-info-modal @songUpdated="updateView" :genreInModal="genreInModal"></genre-info-modal>
+    <genre-info-modal @genreUpdated="updateView" :genreInModal="genreInModal"></genre-info-modal>
     `,
     components: {
         genresList: genresList,

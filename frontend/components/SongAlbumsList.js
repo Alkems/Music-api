@@ -4,7 +4,7 @@ export default {
     <table id="songalbumTable" class="table table-striped table-bordered">
         <tr>
             <th>Track Number</th>
-            <th>Artist Id</th>
+            <th>Album Id</th>
             <th>Song Id</th>
         </tr>
         <tr v-for="songalbum in songalbums">
@@ -25,8 +25,9 @@ export default {
     },
     methods: {
         getSongAlbum: async function (id) {
-            const songAlbuminModal = await (await fetch(this.API_URL + "/songalbums/" + id)).json()
-            this.$emit("showModal", songAlbuminModal)
+            const songAlbumInModal = await (await fetch(this.API_URL + "/songalbums/" + id)).json()
+            console.log(songAlbumInModal)
+            this.$emit("showModal", songAlbumInModal)
         }
     }
 }

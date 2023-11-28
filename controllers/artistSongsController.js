@@ -53,7 +53,7 @@ exports.editById = async (req, res) => {
 
     res.status(200)
         .location(`${getBaseurl(req)}/artistsongs/${req.params.id}`)
-        .send
+        .send()
 }
 
 // DELETE

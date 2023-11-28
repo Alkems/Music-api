@@ -21,7 +21,7 @@ export default {
     },
     methods: {
         getGenre: async function (id) {
-            const genreinModal = await (await fetch(this.API_URL + "/genre/" + id)).json()
+            const genreinModal = await (await fetch(this.API_URL + "/genres/" + id)).json()
             this.$emit("showModal", genreinModal)
         }
     }

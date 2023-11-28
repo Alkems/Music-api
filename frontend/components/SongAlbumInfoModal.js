@@ -14,14 +14,14 @@ export default {
                         <td>{{songAlbumInModal.id}}</td>
                     </tr>
                     <tr>
-                        <th>Role</th>
-                        <td v-if="isEditing"><input type="text" v-model="modifiedSongAlbum.role"></td>
-                        <td v-else>{{songAlbumInModal.role}}</td>
+                        <th>Track Number</th>
+                        <td v-if="isEditing"><input type="text" v-model="modifiedSongAlbum.track_number"></td>
+                        <td v-else>{{songAlbumInModal.track_number}}</td>
                     </tr>
                     <tr>
-                        <th>Artist Id</th>
-                        <td v-if="isEditing"><input type="text" v-model="modifiedSongAlbum.ArtistId"></td>
-                        <td v-else>{{songAlbumInModal.ArtistId}}</td>
+                        <th>Album Id</th>
+                        <td v-if="isEditing"><input type="text" v-model="modifiedSongAlbum.AlbumId"></td>
+                        <td v-else>{{songAlbumInModal.AlbumId}}</td>
                     </tr>
                     <tr>
                         <th>Song Id</th>
