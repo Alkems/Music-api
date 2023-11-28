@@ -35,6 +35,7 @@ export default {
         </div>
       </div>
     </nav> 
+    <p>Welcome to Music API created by Kenneth and Kristjan.</p>
     <router-view></router-view>
     `
 }
