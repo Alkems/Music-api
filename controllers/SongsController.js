@@ -44,7 +44,7 @@ exports.editById = async (req, res) => {
     console.log("Update: ", req.params, req.body)
     const updateResult = await songs.update({ ...req.body}, {
         where: {id:req.body.id},
-        fields: ["name"]
+        fields: ["name","GenreId","date_published"]
     })
     if (updateResult[0] == 0) {
         return res.status(404).send({ error: "Song not found" })

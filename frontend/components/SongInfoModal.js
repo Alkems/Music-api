@@ -21,13 +21,17 @@ export default {
                     </tr>
                     <tr>
                         <th>Genre Id</th>
-                        <td v-if="isEditing"><input type="text" v-model="modifiedSong.GenreId"></td>
+                        <td v-if="isEditing"><input type="number" v-model="modifiedSong.GenreId"></td>
                         <td v-else>{{songInModal.GenreId}}</td>
                     </tr>
                     <tr>
                         <th>Date Published</th>
-                        <td v-if="isEditing"><input type="text" v-model="modifiedSong.date_published"></td>
-                        <td v-else>{{songInModal.date_published}}</td>
+                        <td v-if="isEditing">
+                            <input type="date" v-model="formattedDate">
+                        </td>
+                        <td v-else>
+                            {{ songInModal.date_published }}
+                        </td>
                     </tr>
                 </table>
             </div>
@@ -70,6 +74,17 @@ export default {
             isEditing: false,
             modifiedSong:{}
         }
+    },
+    computed: {
+        //fix date formatting so it works with <input type="date">
+        formattedDate: {
+          get() {
+            return this.modifiedSong.date_published ? new Date(this.modifiedSong.date_published).toISOString().split('T')[0] : null;
+          },
+          set(value) {
+            this.modifiedSong.date_published = value;
+          },
+        },
     },
     methods: {
         startEditing(){

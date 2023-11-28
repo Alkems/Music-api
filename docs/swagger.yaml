@@ -107,7 +107,7 @@ paths:
                                     value:
                                         id: 1
                                         name: Viva La Vida
-                                        genre_id: 1
+                                        GenreId: 1
                                         date_published: 12-03-2023
                     description: Success
             summary: Add a new Song
@@ -132,10 +132,10 @@ paths:
                                 songs:
                                     value: |-
                                         let data = [
-                                            {id:1, name:"Viva La Vida", genre_id:1, date_published:Date(20/12/2022)}, 
-                                            {id:2, name:"In the end", genre_id:1, date_published:Date(20/12/2022)},
-                                            {id:3, name:"Daylight", genre_id:1, date_published:Date(20/12/2022)},
-                                            {id:4, name:"Megalovania", genre_id:1, date_published:Date(20/12/2022)},
+                                            {id:1, name:"Viva La Vida", GenreId:1, date_published:Date(20/12/2022)}, 
+                                            {id:2, name:"In the end", GenreId:1, date_published:Date(20/12/2022)},
+                                            {id:3, name:"Daylight", GenreId:1, date_published:Date(20/12/2022)},
+                                            {id:4, name:"Megalovania", GenreId:1, date_published:Date(20/12/2022)},
                                         ]
                     description: Succesful
                 '404':
@@ -155,7 +155,7 @@ paths:
                                     id: 32
                                     name: Rap god
                                     date_published: 12-03-2023
-                                    genre_id: 1
+                                    GenreId: 1
                 required: true
             tags:
                 - songs
@@ -790,8 +790,8 @@ components:
             type: object
             example: |-
                 let data = [
-                    {id:1, genre_id:"0", name:"Gangnam style", date_published:Date(1/2/2022)}, 
-                    {id:2, genre_id:"0", name:"song", date_published:Date(20/12/2022)}, 
+                    {id:1, GenreId:"0", name:"Gangnam style", date_published:Date(1/2/2022)}, 
+                    {id:2, GenreId:"0", name:"song", date_published:Date(20/12/2022)}, 
                 ]
         artistsong:
             description: ''

@@ -7,7 +7,7 @@ module.exports = (dbConnection, Sequelize, Genre)=>{
         },
         GenreId:{
             type: Sequelize.INTEGER,
-            allowNull: false,
+            allowNull: true,
             references: {
                 model: Genre,
                 key: "id"
