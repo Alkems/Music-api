@@ -1,7 +1,7 @@
 export default {
     /*html*/
     template: `
-<div id="artistsongInfoModal" class="modal" tabindex="-1">
+<div id="songalbumInfoModal" class="modal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -11,28 +11,28 @@ export default {
                 <table class="table table-striped">
                     <tr>
                         <th>Id</th>
-                        <td>{{artistSongInModal.id}}</td>
+                        <td>{{songAlbumInModal.id}}</td>
                     </tr>
                     <tr>
                         <th>Role</th>
-                        <td v-if="isEditing"><input type="text" v-model="modifiedArtistSong.role"></td>
-                        <td v-else>{{artistSongInModal.role}}</td>
+                        <td v-if="isEditing"><input type="text" v-model="modifiedSongAlbum.role"></td>
+                        <td v-else>{{songAlbumInModal.role}}</td>
                     </tr>
                     <tr>
                         <th>Artist Id</th>
-                        <td v-if="isEditing"><input type="text" v-model="modifiedArtistSong.ArtistId"></td>
-                        <td v-else>{{artistSongInModal.ArtistId}}</td>
+                        <td v-if="isEditing"><input type="text" v-model="modifiedSongAlbum.ArtistId"></td>
+                        <td v-else>{{songAlbumInModal.ArtistId}}</td>
                     </tr>
                     <tr>
                         <th>Song Id</th>
-                        <td v-if="isEditing"><input type="text" v-model="modifiedArtistSong.SongId"></td>
-                        <td v-else>{{artistSongInModal.SongId}}</td>
+                        <td v-if="isEditing"><input type="text" v-model="modifiedSongAlbum.SongId"></td>
+                        <td v-else>{{songAlbumInModal.SongId}}</td>
                     </tr>
                 </table>
             </div>
             <div class="modal-footer">
                 <template v-if="isEditing">
-                    <button type="button" class="btn btn-success" @click="saveModifiedArtistSong">Save</button>
+                    <button type="button" class="btn btn-success" @click="saveModifiedSongAlbum">Save</button>
                     <button type="button" class="btn btn-secondary" @click="cancelEditing">Cancel</button>
                 </template>
                 <template v-else>
@@ -44,36 +44,36 @@ export default {
     </div>
 </div>
     `,
-    emits:["artistSongUpdated"],
+    emits:["songAlbumUpdated"],
     props: {
-        artistSongInModal: {}
+        songAlbumInModal: {}
     },
     data() {
         return{
             isEditing: false,
-            modifiedArtistSong:{}
+            modifiedSongAlbum:{}
         }
     },
     methods: {
         startEditing(){
-            this.modifiedArtistSong = {...this.artistSongInModal}
+            this.modifiedSongAlbum = {...this.songAlbumInModal}
             this.isEditing = true
         },
         cancelEditing(){
             this.isEditing = false
         },
-        async saveModifiedArtistSong(){
-            console.log("Saving:", this.modifiedArtistSong)
-            const rawResponse = await fetch(this.API_URL + "/artistSongs/" + this.modifiedArtistSong.id, {
+        async saveModifiedSongAlbum(){
+            console.log("Saving:", this.modifiedSongAlbum)
+            const rawResponse = await fetch(this.API_URL + "/songAlbums/" + this.modifiedSongAlbum.id, {
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(this.modifiedArtistSong)
+                body: JSON.stringify(this.modifiedSongAlbum)
             });
             console.log(rawResponse);
-            this.$emit("artistSongUpdated", this.modifiedArtistSong)
+            this.$emit("songAlbumUpdated", this.modifiedSongAlbum)
             this.isEditing = false
         }
     }

@@ -1,31 +1,31 @@
-import artistsongssList from "../components/ArtistSongsList.js"
-import artistsongInfoModal from "../components/ArtistInfoModal.js"
+import artistsongsList from "../components/ArtistSongsList.js"
+import artistsongInfoModal from "../components/ArtistSongInfoModal.js"
 export default {
     /*html*/
     template: `
     <h2>Artist Songs</h2>
     <artistsongs-list :key="update" @showModal="openModal"></artistsongs-list>
-    <artistsong-info-modal @artistUpdated="updateView" :artistsongInModal="artistInModal"></artistsong-info-modal>
+    <artistsong-info-modal @artistSongUpdated="updateView" :artistSongInModal="artistSongInModal"></artistsong-info-modal>
     `,
     components: {
-        artistsongsList: artistsongssList,
+        artistsongsList: artistsongsList,
         artistsongInfoModal: artistsongInfoModal,
     },
     data() {
         return {
             update: 0,
-            artistsongInModal: { id: "", role: "", SongId: "", ArtistId: "" },
+            artistSongInModal: { id: "", role: "", SongId: "", ArtistId: "" },
         }
     },
     methods: {
         openModal(artistsong) {
-            this.artistsongInModal = artistsong
+            this.artistSongInModal = artistsong
             let artistsongInfoModal = new bootstrap.Modal(document.getElementById("artistsongInfoModal"))
             artistsongInfoModal.show()
         },
         updateView(artistsong){
             this.update++
-            this.artistsongInModal = artistsong
+            this.artistSongInModal = artistsong
         }
     }
 }

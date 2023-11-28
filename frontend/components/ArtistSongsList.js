@@ -25,8 +25,8 @@ export default {
     },
     methods: {
         getArtistSong: async function (id) {
-            const artistsonginModal = await (await fetch(this.API_URL + "/artistsongs/" + id)).json()
-            this.$emit("showModal", artistsonginModal)
+            const artistSongInModal = await (await fetch(this.API_URL + "/artistsongs/" + id)).json()
+            this.$emit("showModal", artistSongInModal)
         }
     }
 }
