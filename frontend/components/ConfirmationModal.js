@@ -13,7 +13,7 @@ export default {
         </div>
         <div class="modal-footer">
           <button class="btn btn-success" @click="$emit('confirmed')" data-bs-dismiss="modal">Yes</button>
-          <button class="btn btn-secondary" :data-bs-target="target" data-bs-toggle="modal">No</button>
+          <button class="btn btn-secondary" @click="$emit('canceldelete')" :data-bs-target="target" data-bs-toggle="modal">No</button>
         </div>
       </div>
     </div>
@@ -22,5 +22,5 @@ export default {
     props: {
         target: ""
     },
-    emits: ["confirmed"]
+    emits: ["confirmed","canceldelete"]
 }
