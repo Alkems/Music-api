@@ -21,8 +21,8 @@ export default {
     },
     methods: {
         getAlbum: async function (id) {
-            const albuminModal = await (await fetch(this.API_URL + "/albums/" + id)).json()
-            this.$emit("showModal", albuminModal)
+            const albumInModal = await (await fetch(this.API_URL + "/albums/" + id)).json()
+            this.$emit("showModal", albumInModal)
         }
     }
 }

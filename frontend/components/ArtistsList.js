@@ -23,8 +23,8 @@ export default {
     },
     methods: {
         getArtist: async function (id) {
-            const artistinModal = await (await fetch(this.API_URL + "/artists/" + id)).json()
-            this.$emit("showModal", artistinModal)
+            const artistInModal = await (await fetch(this.API_URL + "/artists/" + id)).json()
+            this.$emit("showModal", artistInModal)
         }
     }
 }

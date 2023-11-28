@@ -2,7 +2,7 @@ import confirmationModal from "./ConfirmationModal.js"
 export default {
     /*html*/
     template: `
-<div id="songalbumInfoModal" class="modal" tabindex="-1">
+<div id="songAlbumInfoModal" class="modal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -56,7 +56,7 @@ export default {
         </div>
     </div>
 </div>
-<confirmation-modal :target="'#songalbumInfoModal'" @confirmed="deleteSongAlbum" @canceldelete="cancelEditing"></confirmation-modal>
+<confirmation-modal :target="'#songAlbumInfoModal'" @confirmed="deleteSongAlbum" @canceldelete="cancelEditing"></confirmation-modal>
     `,
     components: {
         confirmationModal

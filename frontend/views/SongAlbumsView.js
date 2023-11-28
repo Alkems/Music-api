@@ -1,15 +1,15 @@
-import songalbumsList from "../components/SongAlbumsList.js"
-import songalbumInfoModal from "../components/SongAlbumInfoModal.js"
+import songAlbumsList from "../components/SongAlbumsList.js"
+import songAlbumInfoModal from "../components/SongAlbumInfoModal.js"
 export default {
     /*html*/
     template: `
     <h2>Song Albums</h2>
-    <songalbums-list :key="update" @showModal="openModal"></songalbums-list>
-    <songalbum-info-modal @songAlbumUpdated="updateView" :songAlbumInModal="songAlbumInModal"></songalbum-info-modal>
+    <song-albums-list :key="update" @showModal="openModal"></song-albums-list>
+    <song-album-info-modal @songAlbumUpdated="updateView" :songAlbumInModal="songAlbumInModal"></song-album-info-modal>
     `,
     components: {
-        songalbumsList: songalbumsList,
-        songalbumInfoModal: songalbumInfoModal,
+        songAlbumsList: songAlbumsList,
+        songAlbumInfoModal: songAlbumInfoModal,
     },
     data() {
         return {
@@ -18,14 +18,14 @@ export default {
         }
     },
     methods: {
-        openModal(songalbum) {
-            this.songAlbumInModal = songalbum
-            let songAlbumInfoModal = new bootstrap.Modal(document.getElementById("songalbumInfoModal"))
+        openModal(songAlbum) {
+            this.songAlbumInModal = songAlbum
+            let songAlbumInfoModal = new bootstrap.Modal(document.getElementById("songAlbumInfoModal"))
             songAlbumInfoModal.show()
         },
-        updateView(songalbum){
+        updateView(songAlbum){
             this.update++
-            this.songAlbumInModal = songalbum
+            this.songAlbumInModal = songAlbum
         }
     }
 }

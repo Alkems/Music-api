@@ -1,31 +1,31 @@
 export default {
     /*html*/
     template: `
-    <table id="songalbumTable" class="table table-striped table-bordered">
+    <table id="songAlbumTable" class="table table-striped table-bordered">
         <tr>
             <th>Track Number</th>
             <th>Album Id</th>
             <th>Song Id</th>
         </tr>
-        <tr v-for="songalbum in songalbums">
-            <td @click="getSongAlbum(songalbum.id)">{{ songalbum.track_number }}</td>
-            <td>{{ songalbum.AlbumId }}</td>
-            <td>{{ songalbum.SongId }}</td>
+        <tr v-for="songAlbum in songAlbums">
+            <td @click="getSongAlbum(songAlbum.id)">{{ songAlbum.track_number }}</td>
+            <td>{{ songAlbum.AlbumId }}</td>
+            <td>{{ songAlbum.SongId }}</td>
         </tr>
     </table>
     `,
     emits: ["showModal"],
     data() {
         return {
-            songalbums: []
+            songAlbums: []
         }
     },
     async created() {
-        this.songalbums = await (await fetch("http://localhost:8080/songalbums")).json()
+        this.songAlbums = await (await fetch("http://localhost:8080/songAlbums")).json()
     },
     methods: {
         getSongAlbum: async function (id) {
-            const songAlbumInModal = await (await fetch(this.API_URL + "/songalbums/" + id)).json()
+            const songAlbumInModal = await (await fetch(this.API_URL + "/songAlbums/" + id)).json()
             console.log(songAlbumInModal)
             this.$emit("showModal", songAlbumInModal)
         }
