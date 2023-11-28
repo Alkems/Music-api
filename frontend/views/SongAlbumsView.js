@@ -1,5 +1,5 @@
-import songAlbumsList from "../components/SongAlbumsList.js"
-import songAlbumInfoModal from "../components/SongAlbumInfoModal.js"
+import songalbumsList from "../components/SongAlbumsList.js"
+import songalbumInfoModal from "../components/SongAlbumInfoModal.js"
 export default {
     /*html*/
     template: `
@@ -8,8 +8,8 @@ export default {
     <songalbum-info-modal @songAlbumUpdated="updateView" :songAlbumInModal="songAlbumInModal"></songalbum-info-modal>
     `,
     components: {
-        songAlbumsList: songAlbumsList,
-        songAlbumInfoModal: songAlbumInfoModal,
+        songalbumsList: songalbumsList,
+        songalbumInfoModal: songalbumInfoModal,
     },
     data() {
         return {
