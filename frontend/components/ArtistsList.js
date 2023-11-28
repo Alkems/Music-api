@@ -19,12 +19,12 @@ export default {
         }
     },
     async created() {
-        this.artists = await (await fetch(this.API_URL + "/artists")).json()
+        this.artists = await (await fetch("http://localhost:8080/artists")).json()
     },
     methods: {
         getArtist: async function (id) {
             const artistinModal = await (await fetch(this.API_URL + "/artists/" + id)).json()
             this.$emit("showModal", artistinModal)
-        },
+        }
     }
 }

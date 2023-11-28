@@ -1,31 +1,40 @@
-import artistsList from "./components/ArtistsList.js"
-import artistInfoModal from "./components/ArtistInfoModal.js"
 export default {
     /*html*/
     template: `
-    <h2>Artists</h2>
-    <artists-list :key="update" @showModal="openModal"></artists-list>
-    <artist-info-modal @artistUpdated="updateView" :artistInModal="artistInModal"></artist-info-modal>
-    `,
-    components: {
-        artistsList: artistsList,
-        artistInfoModal: artistInfoModal,
-    },
-    data() {
-        return {
-            update: 0,
-            artistInModal: { id: "", name: "", country: "" },
-        }
-    },
-    methods: {
-        openModal(artist) {
-            this.artistInModal = artist
-            let artistInfoModal = new bootstrap.Modal(document.getElementById("artistInfoModal"))
-            artistInfoModal.show()
-        },
-        updateView(artist){
-            this.update++
-            this.artistInModal = artist
-        }
-    }
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Music</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <router-link class="nav-link" to="/artists">Artists</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/songs">Songs</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/genres">Genres</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/albums">Albums</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/artistsongs">ArtistSongs</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/songalbums">SongAlbums</router-link>
+            </li>
+          </ul>
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </nav> 
+    <router-view></router-view>
+    `
 }
