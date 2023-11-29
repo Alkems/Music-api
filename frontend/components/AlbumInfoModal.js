@@ -19,6 +19,12 @@ export default {
                         <td v-if="isEditing"><input type="text" v-model="modifiedAlbum.name"></td>
                         <td v-else>{{albumInModal.name}}</td>
                     </tr>
+                    <tr>
+                        <th>Songs</th>
+                        <div v-for="song in songs">
+                            {{song.SongAlbum.track_number}} - {{song.name}}
+                        </div>
+                    </tr>
                 </table>
             </div>
             <div class="modal-footer">
@@ -58,10 +64,22 @@ export default {
     data() {
         return{
             isEditing: false,
-            modifiedAlbum:{}
+            modifiedAlbum:{},
+            songs: []
+        }
+    },
+    watch: {
+        'albumInModal.id': function(newVal) {
+            if (newVal) {
+                this.fetchSongsForAlbum();
+            }
         }
     },
     methods: {
+        async fetchSongsForAlbum() {
+            const album = await (await fetch(this.API_URL + "/albums/"+ this.albumInModal.id)).json();
+            this.songs = album.Songs;
+        },
         startEditing(){
             this.modifiedAlbum = {...this.albumInModal}
             this.isEditing = true

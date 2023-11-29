@@ -19,12 +19,17 @@ exports.createNew = async (req, res) => {
 }
 // READ
 exports.getAll = async (req, res) => {
-    const result = await albums.findAll({ attributes: ["id", "name"] })
+    const result = await albums.findAll({ 
+        include: [db.songs] 
+    })
+    
     res.json(result)
 }
 
 exports.getById = async (req, res) => {
-    const foundAlbum = await albums.findByPk(req.params.id)
+    const foundAlbum = await albums.findByPk(req.params.id,{
+        include: [db.songs]
+    })
     if (foundAlbum === null) {
         return res.status(404).send({ error: 'Album not found`'})
     }
