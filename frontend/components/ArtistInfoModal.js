@@ -24,6 +24,12 @@ export default {
                         <td v-if="isEditing"><input type="text" v-model="modifiedArtist.country"></td>
                         <td v-else>{{artistInModal.country}}</td>
                     </tr>
+                    <tr>
+                        <th>Songs</th>
+                        <div v-for="song in songs">
+                            {{song.name}} - {{song.ArtistSong.role}}
+                        </div>
+                    </tr>
                 </table>
             </div>
             <div class="modal-footer">
@@ -63,10 +69,22 @@ export default {
     data() {
         return{
             isEditing: false,
-            modifiedArtist:{}
+            modifiedArtist:{},
+            songs: []
+        }
+    },
+    watch: {
+        'artistInModal.id': function(newVal) {
+            if (newVal) {
+                this.fetchSongs();
+            }
         }
     },
     methods: {
+        async fetchSongs() {
+            const artist = await (await fetch(this.API_URL + "/artists/"+ this.artistInModal.id)).json();
+            this.songs = artist.Songs;
+        },
         startEditing(){
             this.modifiedArtist = {...this.artistInModal}
             this.isEditing = true
