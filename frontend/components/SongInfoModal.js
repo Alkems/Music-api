@@ -21,8 +21,13 @@ export default {
                     </tr>
                     <tr>
                         <th>Genre Id</th>
-                        <td v-if="isEditing"><input type="number" v-model="modifiedSong.GenreId"></td>
-                        <td v-else>{{songInModal.GenreId}}</td>
+                        <td v-if="isEditing">
+                            <select v-model="modifiedSong.GenreId">
+                                <option :value="null">No genre</option>
+                                <option v-for="genre in genres" :value="genre.id">{{genre.name}}</option>
+                            </select>
+                        </td>
+                        <td v-else>{{ genreName }}</td>
                     </tr>
                     <tr>
                         <th>Date Published</th>
@@ -72,7 +77,8 @@ export default {
     data() {
         return{
             isEditing: false,
-            modifiedSong:{}
+            modifiedSong:{},
+            genres:[],
         }
     },
     computed: {
@@ -83,8 +89,19 @@ export default {
           },
           set(value) {
             this.modifiedSong.date_published = value;
-          },
+          }
         },
+        genreName:{
+            get(){
+                if(this.songInModal.GenreId == null) return "No Genre";
+                const genre = this.genres.find(genre => genre.id == this.songInModal.GenreId)
+                if(genre) return genre.name
+                return "";
+            }
+        }
+    },
+    async created() {
+        this.genres = await (await fetch(this.API_URL + "/genres")).json()
     },
     methods: {
         startEditing(){
@@ -105,7 +122,9 @@ export default {
                 body: JSON.stringify(this.modifiedSong)
             });
             console.log(rawResponse);
+
             this.$emit("songUpdated", this.modifiedSong)
+
             this.isEditing = false
         },
         deleteSong(){

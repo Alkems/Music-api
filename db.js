@@ -33,8 +33,15 @@ db.songs.hasMany(db.artistSong)
 db.artistSong.belongsTo(db.artists)
 db.artistSong.belongsTo(db.songs)
 
-db.songs.belongsTo(db.genres)
-db.genres.hasMany(db.songs)
+db.songs.belongsTo(db.genres, {
+    foreignKey: 'GenreId',
+    onDelete: 'SET NULL', 
+});
+  
+db.genres.hasMany(db.songs, {
+    foreignKey: 'GenreId',
+    onDelete: 'SET NULL', 
+});
 
 db.songs.belongsToMany(db.albums, { through: db.songAlbum})
 db.albums.belongsToMany(db.songs, { through: db.songAlbum})
@@ -70,6 +77,15 @@ sync = async ()=>{
             },
             defaults: {
                 name: "Rock"
+            }
+        })
+
+        const [genre2, createdG2] = await db.genres.findOrCreate({
+            where: {
+                name: "Pop"
+            },
+            defaults: {
+                name: "Pop"
             }
         })
 

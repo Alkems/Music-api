@@ -11,7 +11,8 @@ module.exports = (dbConnection, Sequelize, Genre)=>{
             references: {
                 model: Genre,
                 key: "id"
-            }
+            },
+            onDelete: 'SET NULL'
         },
         name:{
             type: Sequelize.STRING,

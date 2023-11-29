@@ -26,6 +26,7 @@ export default {
         updateView(song){
             this.update++
             this.songInModal = song
+            
         }
     }
 }
