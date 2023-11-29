@@ -16,18 +16,26 @@ export default {
                     </tr>
                     <tr>
                         <th>Track Number</th>
-                        <td v-if="isEditing"><input type="text" v-model="modifiedSongAlbum.track_number"></td>
+                        <td v-if="isEditing"><input type="number" v-model="modifiedSongAlbum.track_number"></td>
                         <td v-else>{{songAlbumInModal.track_number}}</td>
                     </tr>
                     <tr>
-                        <th>Album Id</th>
-                        <td v-if="isEditing"><input type="text" v-model="modifiedSongAlbum.AlbumId"></td>
-                        <td v-else>{{songAlbumInModal.AlbumId}}</td>
+                        <th>Album</th>
+                        <td v-if="isEditing">
+                            <select v-model="modifiedSongAlbum.AlbumId">
+                                <option v-for="album in albums" :value="album.id">{{album.name}}</option>
+                            </select>
+                        </td>
+                        <td v-else>{{albumName}}</td>
                     </tr>
                     <tr>
-                        <th>Song Id</th>
-                        <td v-if="isEditing"><input type="text" v-model="modifiedSongAlbum.SongId"></td>
-                        <td v-else>{{songAlbumInModal.SongId}}</td>
+                        <th>Song</th>
+                        <td v-if="isEditing">
+                            <select v-model="modifiedSongAlbum.SongId">
+                                <option v-for="song in songs" :value="song.id">{{song.name}}</option>
+                            </select>
+                        </td>
+                        <td v-else>{{songName}}</td>
                     </tr>
                 </table>
             </div>
@@ -65,10 +73,32 @@ export default {
     props: {
         songAlbumInModal: {}
     },
+    computed: {
+        albumName:{
+            get(){
+                const album = this.albums.find(album => album.id == this.songAlbumInModal.AlbumId)
+                if(album) return album.name
+                return "";
+            }
+        },
+        songName:{
+            get(){
+                const song = this.songs.find(song => song.id == this.songAlbumInModal.SongId)
+                if(song) return song.name
+                return "";
+            }
+        }
+    },
+    async created() {
+        this.songs = await (await fetch(this.API_URL + "/songs")).json()
+        this.albums = await (await fetch(this.API_URL + "/albums")).json()
+    },
     data() {
         return{
             isEditing: false,
-            modifiedSongAlbum:{}
+            modifiedSongAlbum:{},
+            albums: [],
+            songs: []
         }
     },
     methods: {

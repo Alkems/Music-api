@@ -20,14 +20,22 @@ export default {
                         <td v-else>{{artistSongInModal.role}}</td>
                     </tr>
                     <tr>
-                        <th>Artist Id</th>
-                        <td v-if="isEditing"><input type="text" v-model="modifiedArtistSong.ArtistId"></td>
-                        <td v-else>{{artistSongInModal.ArtistId}}</td>
+                        <th>Artist</th>
+                        <td v-if="isEditing">
+                            <select v-model="modifiedArtistSong.ArtistId">
+                                <option v-for="artist in artists" :value="artist.id">{{artist.name}}</option>
+                            </select>
+                        </td>
+                        <td v-else>{{artistName}}</td>
                     </tr>
                     <tr>
-                        <th>Song Id</th>
-                        <td v-if="isEditing"><input type="text" v-model="modifiedArtistSong.SongId"></td>
-                        <td v-else>{{artistSongInModal.SongId}}</td>
+                        <th>Song</th>
+                        <td v-if="isEditing">
+                            <select v-model="modifiedArtistSong.SongId">
+                                <option v-for="song in songs" :value="song.id">{{song.name}}</option>
+                            </select>
+                        </td>
+                        <td v-else>{{songName}}</td>
                     </tr>
                 </table>
             </div>
@@ -65,10 +73,32 @@ export default {
     props: {
         artistSongInModal: {}
     },
+    computed: {
+        artistName:{
+            get(){
+                const artist = this.artists.find(artist => artist.id == this.artistSongInModal.ArtistId)
+                if(artist) return artist.name
+                return "";
+            }
+        },
+        songName:{
+            get(){
+                const song = this.songs.find(song => song.id == this.artistSongInModal.SongId)
+                if(song) return song.name
+                return "";
+            }
+        }
+    },
+    async created() {
+        this.artists = await (await fetch(this.API_URL + "/artists")).json()
+        this.songs = await (await fetch(this.API_URL + "/songs")).json()
+    },
     data() {
         return{
             isEditing: false,
-            modifiedArtistSong:{}
+            modifiedArtistSong:{},
+            artists: [],
+            songs: []
         }
     },
     methods: {

@@ -4,13 +4,13 @@ export default {
     <table id="songAlbumTable" class="table table-striped table-bordered">
         <tr>
             <th>Track Number</th>
-            <th>Album Id</th>
-            <th>Song Id</th>
+            <th>Album</th>
+            <th>Song</th>
         </tr>
         <tr v-for="songAlbum in songAlbums">
             <td @click="getSongAlbum(songAlbum.id)">{{ songAlbum.track_number }}</td>
-            <td>{{ songAlbum.AlbumId }}</td>
-            <td>{{ songAlbum.SongId }}</td>
+            <td>{{ songAlbum.Album.name }}</td>
+            <td>{{ songAlbum.Song.name }}</td>
         </tr>
     </table>
     `,
@@ -26,7 +26,6 @@ export default {
     methods: {
         getSongAlbum: async function (id) {
             const songAlbumInModal = await (await fetch(this.API_URL + "/songAlbums/" + id)).json()
-            console.log(songAlbumInModal)
             this.$emit("showModal", songAlbumInModal)
         }
     }

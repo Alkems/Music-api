@@ -4,14 +4,14 @@ export default {
     <table id="artistSongsTable" class="table table-striped table-bordered">
         <tr>
             <th>Role</th>
-            <th>Artist Id</th>
-            <th>Song Id</th>
+            <th>Artist</th>
+            <th>Song</th>
         </tr>
         <tr v-for="artistSong in artistSongs">
             <td @click="getArtistSong(artistSong.id)">{{ artistSong.role }}</td>
-            <td>{{ artistSong.ArtistId }}</td>
-            <td>{{ artistSong.SongId }}</td>
-        </tr>
+            <td>{{ artistSong.Artist.name }}</td>
+            <td>{{ artistSong.Song.name }}</td>
+        </tr>   
     </table>
     `,
     emits: ["showModal"],
