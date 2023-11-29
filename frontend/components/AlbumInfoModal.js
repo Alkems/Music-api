@@ -79,6 +79,7 @@ export default {
         async fetchSongsForAlbum() {
             const album = await (await fetch(this.API_URL + "/albums/"+ this.albumInModal.id)).json();
             this.songs = album.Songs;
+            this.songs.sort((a,b) => a.SongAlbum.track_number - b.SongAlbum.track_number);
         },
         startEditing(){
             this.modifiedAlbum = {...this.albumInModal}
