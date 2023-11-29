@@ -24,7 +24,9 @@ exports.getAll = async (req, res) => {
 }
 
 exports.getById = async (req, res) => {
-    const foundGenre = await genres.findByPk(req.params.id)
+    const foundGenre = await genres.findByPk(req.params.id,{
+        include: [db.songs]
+    })
     if (foundGenre === null) {
         return res.status(404).send({ error: 'Genre not found`'})
     }
