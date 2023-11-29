@@ -29,6 +29,12 @@ export default {
                         <div v-for="song in songs">
                             {{song.name}} - {{song.ArtistSong.role}}
                         </div>
+                        <form @submit.prevent="linkSongToArtist">
+                            <input type="hidden" v-model="newArtistSong.ArtistId">
+                            <input type="number" v-model="newArtistSong.SongId" placeholder="Song Id">
+                            <input type="text" v-model="newArtistSong.role" placeholder="Role">
+                            <button type="submit">Link Song</button>
+                        </form>
                     </tr>
                 </table>
             </div>
@@ -70,7 +76,12 @@ export default {
         return{
             isEditing: false,
             modifiedArtist:{},
-            songs: []
+            songs: [],
+            newArtistSong:{
+                artistId: null,
+                songId: null,
+                role: ""
+            }
         }
     },
     watch: {
@@ -81,6 +92,18 @@ export default {
         }
     },
     methods: {
+        async linkSongToArtist() {
+            const response = await fetch(this.API_URL + "/artistSongs", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(this.newArtistSong)
+            });
+            const newArtistSong = await response.json();
+            this.songs.push(newArtistSong);
+            this.newArtistSong = { SongId: null, role: '' };
+        },
         async fetchSongs() {
             const artist = await (await fetch(this.API_URL + "/artists/"+ this.artistInModal.id)).json();
             this.songs = artist.Songs;
