@@ -28,7 +28,7 @@ export default {
                         <th>Songs</th>
                         <div v-for="song in artistSongs">
                             <!-- add delete button for songlink list -->
-                            {{song.name}} - {{song.ArtistSong.role}}
+                            {{song.name}} - {{song.ArtistSong.role}} <button type="button" class="btn btn-danger mx-2" @click="unlinkSongFromArtist(song.ArtistSong.id)">Delete</button>
                         </div>
                         <div class="col-auto" v-if="isEditing">
                             <!-- add select list for song id -->
@@ -105,6 +105,13 @@ export default {
             });
             this.newArtistSong = {};
             this.isEditing = false;
+            this.fetchSongs();
+        },
+        async unlinkSongFromArtist(songId) {
+            console.log("Unlinking:", songId);
+            const response = await fetch(this.API_URL + "/artistSongs/" + songId, {
+                method: 'DELETE'
+            });
             this.fetchSongs();
         },
         async fetchSongs() {
