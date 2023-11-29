@@ -19,6 +19,10 @@ export default {
                         <td v-if="isEditing"><input type="text" v-model="modifiedGenre.name"></td>
                         <td v-else>{{genreInModal.name}}</td>
                     </tr>
+                    <tr>
+                        <th>Songs</th>
+                        <td v-for="song in songs">{{song.name}}</td>
+                    </tr>
                 </table>
             </div>
             <div class="modal-footer">
@@ -58,10 +62,22 @@ export default {
     data() {
         return{
             isEditing: false,
-            modifiedGenre:{}
+            modifiedGenre:{},
+            songs: []
+        }
+    },
+    watch: {
+        'genreInModal.id': function(newVal) {
+            if (newVal) {
+                this.fetchSongs();
+            }
         }
     },
     methods: {
+        async fetchSongs() {
+            const genre = await (await fetch(this.API_URL + "/genres/"+ this.genreInModal.id)).json();
+            this.songs = genre.Songs;
+        },
         startEditing(){
             this.modifiedGenre = {...this.genreInModal}
             this.isEditing = true
