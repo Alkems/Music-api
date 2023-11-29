@@ -21,7 +21,9 @@ exports.getAll = async (req, res) => {
 }
 
 exports.getById = async (req, res) => {
-    const foundArtist = await artists.findByPk(req.params.id)
+    const foundArtist = await artists.findByPk(req.params.id,{
+        include: [db.songs]
+    })
     if (foundArtist === null) {
         return res.status(404).send({ error: 'Artist not found`'})
     }
