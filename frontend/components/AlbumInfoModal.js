@@ -21,6 +21,10 @@ export default {
                     </tr>
                     <tr>
                         <th>Songs</th>
+                        <td v-for="song in songs">{{song.name}}</td>
+                    </tr>
+                    <tr>
+                        <th>Songs</th>
                         <div v-for="song in songs">
                             {{song.SongAlbum.track_number}} - {{song.name}}
                         </div>
