@@ -20,10 +20,6 @@ export default {
                         <td v-else>{{songInModal.name}}</td>
                     </tr>
                     <tr>
-                        <th>Songs</th>
-                        <td v-for="song in songs">{{song.name}}</td>
-                    </tr>
-                    <tr>
                         <th>Genre Id</th>
                         <td v-if="isEditing">
                             <select v-model="modifiedSong.GenreId">
@@ -41,6 +37,10 @@ export default {
                         <td v-else>
                             {{ songInModal.date_published }}
                         </td>
+                    </tr>
+                    <tr>
+                        <th>Albums</th>
+                        <td v-for="album in albums">{{album.name}}</td>
                     </tr>
                 </table>
             </div>
