@@ -33,7 +33,7 @@ exports.getAll = async (req, res) => {
 
 exports.getById = async (req, res) => {
     const foundSong = await songs.findByPk(req.params.id,{
-        include: [db.genres]
+        include: [db.genres, db.albums]
     })
     if (foundSong === null) {
         return res.status(404).send({ error: 'Song not found`'})
