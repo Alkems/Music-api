@@ -28,7 +28,7 @@ export default {
                         <th>Songs</th>
                         <div v-for="song in artistSongs">
                             <!-- add delete button for songlink list -->
-                            {{song.name}} - {{song.ArtistSong.role}} <button type="button" class="btn btn-danger mx-2" @click="unlinkSongFromArtist(song.ArtistSong.id)">Delete</button>
+                            {{song.name}} - {{song.ArtistSong.role}} <button v-if="isEditing" type="button" @click="unlinkSongFromArtist(song.ArtistSong.id)">Remove</button>
                         </div>
                         <div class="col-auto" v-if="isEditing">
                             <!-- add select list for song id -->
@@ -37,7 +37,7 @@ export default {
                                 <option v-for="song in linkableSongs" :value="song.id">{{song.name}}</option>
                             </select>
                             <input type="text" v-model="newArtistSong.role" placeholder="Role">
-                            <button type="button" class="btn btn-success mx-2" @click="linkSongToArtist">Add</button>
+                            <button type="button" @click="linkSongToArtist">Add</button>
                         </div>
                     </tr>
                 </table>
@@ -104,7 +104,7 @@ export default {
                 body: JSON.stringify(this.newArtistSong)
             });
             this.newArtistSong = {};
-            this.isEditing = false;
+            //this.isEditing = false;
             this.fetchSongs();
         },
         async unlinkSongFromArtist(songId) {
