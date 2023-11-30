@@ -71,6 +71,16 @@ sync = async ()=>{
             }
         })
 
+        const [artist2, createdA2] = await db.artists.findOrCreate({
+            where: {
+                name: "Eminem"
+            },
+            defaults: {
+                name: "Eminem",
+                country: "Poland",
+            }
+        })
+
         const [genre, createdG] = await db.genres.findOrCreate({
             where: {
                 name: "Rock"
@@ -106,6 +116,17 @@ sync = async ()=>{
             },
             defaults: {
                 name: "The Pretender",
+                date_published: new Date(),
+                GenreId: genre.id
+            }
+        })
+
+        const [song3, createdS3] = await db.songs.findOrCreate({
+            where: {
+                name: "Chug jug with you"
+            },
+            defaults: {
+                name: "Chug jug with you",
                 date_published: new Date(),
                 GenreId: genre.id
             }

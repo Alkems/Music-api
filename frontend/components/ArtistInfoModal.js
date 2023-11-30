@@ -26,8 +26,18 @@ export default {
                     </tr>
                     <tr>
                         <th>Songs</th>
-                        <div v-for="song in songs">
-                            {{song.name}} - {{song.ArtistSong.role}}
+                        <div v-for="song in artistSongs">
+                            <!-- add delete button for songlink list -->
+                            {{song.name}} - {{song.ArtistSong.role}} <button v-if="isEditing" type="button" @click="unlinkSongFromArtist(song.ArtistSong.id)">Remove</button>
+                        </div>
+                        <div class="col-auto" v-if="isEditing">
+                            <!-- add select list for song id -->
+                            <select v-model="newArtistSong.SongId">
+                                <option disabled value="">Select a song</option>
+                                <option v-for="song in linkableSongs" :value="song.id">{{song.name}}</option>
+                            </select>
+                            <input type="text" v-model="newArtistSong.role" placeholder="Role">
+                            <button type="button" @click="linkSongToArtist">Add</button>
                         </div>
                     </tr>
                 </table>
@@ -70,7 +80,9 @@ export default {
         return{
             isEditing: false,
             modifiedArtist:{},
-            songs: []
+            artistSongs: [],
+            linkableSongs: [],
+            newArtistSong:{}
         }
     },
     watch: {
@@ -81,9 +93,33 @@ export default {
         }
     },
     methods: {
+        async linkSongToArtist() {
+            this.newArtistSong.ArtistId = this.artistInModal.id;
+            console.log("Linking:", this.newArtistSong);
+            const response = await fetch(this.API_URL + "/artistSongs", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(this.newArtistSong)
+            });
+            this.newArtistSong = {};
+            //this.isEditing = false;
+            this.fetchSongs();
+        },
+        async unlinkSongFromArtist(songId) {
+            console.log("Unlinking:", songId);
+            const response = await fetch(this.API_URL + "/artistSongs/" + songId, {
+                method: 'DELETE'
+            });
+            this.fetchSongs();
+        },
         async fetchSongs() {
             const artist = await (await fetch(this.API_URL + "/artists/"+ this.artistInModal.id)).json();
-            this.songs = artist.Songs;
+            this.artistSongs = artist.Songs;
+            const songs = await (await fetch(this.API_URL + "/songs")).json();
+            //filter so you cant link songs that are already linked.
+            this.linkableSongs = songs.filter(song => !this.artistSongs.some(artistSong => artistSong.id === song.id));
         },
         startEditing(){
             this.modifiedArtist = {...this.artistInModal}
