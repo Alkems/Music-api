@@ -20,6 +20,10 @@ export default {
                         <td v-else>{{songInModal.name}}</td>
                     </tr>
                     <tr>
+                        <th>Songs</th>
+                        <td v-for="song in songs">{{song.name}}</td>
+                    </tr>
+                    <tr>
                         <th>Genre Id</th>
                         <td v-if="isEditing">
                             <select v-model="modifiedSong.GenreId">
@@ -79,6 +83,15 @@ export default {
             isEditing: false,
             modifiedSong:{},
             genres:[],
+            albums:[]
+
+        }
+    },
+    watch: {
+        'songInModal.id': function(newVal) {
+            if (newVal) {
+                this.fetchAlbums();
+            }
         }
     },
     computed: {
@@ -104,6 +117,10 @@ export default {
         this.genres = await (await fetch(this.API_URL + "/genres")).json()
     },
     methods: {
+        async fetchAlbums() {
+            const song = await (await fetch(this.API_URL + "/songs/"+ this.songInModal.id)).json();
+            this.albums = song.Albums;
+        },
         startEditing(){
             this.modifiedSong = {...this.songInModal}
             this.isEditing = true
