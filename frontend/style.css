@@ -119,10 +119,10 @@ h2 {
 .navbar {
     background-color: #071b30;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 0 15px;
+    padding: 5px 15px;
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Distribute space between items */
+    justify-content: space-between;
 }
 
 .navbar-toggler {
@@ -130,8 +130,9 @@ h2 {
 }
 
 .navbar-brand {
-    font-weight: bold;
+    padding: 5px 10px;
     color: #fff;
+    margin-right: 10px;
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -143,7 +144,17 @@ h2 {
 
 .navbar-collapse {
     display: flex;
-    align-items: center; /* Align nav items */
+    align-items: center;
+    flex-grow: 1;
+}
+
+.logo {
+    font-family: 'Black Ops One';
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 .nav-link {
@@ -156,7 +167,7 @@ h2 {
 
 .navbar-nav {
     display: flex;
-    align-items: center; /* Align nav items */
+    align-items: center;
 }
 
 .nav-link:hover {
@@ -165,20 +176,20 @@ h2 {
 
 /* Search Form Adjustments */
 .form-control {
-    margin-left: 50px;
+    margin-left: 275px;
     padding: 5px 10px;
 }
 
 .d-flex {
     display: flex;
-    align-items: center; /* Align search form */
+    align-items: center;
 }
 
 /* Responsive adjustments */
 @media (max-width: 992px) {
     .navbar-nav,
     .d-flex {
-        display: block; /* Stack items vertically on smaller screens */
+        display: block;
     }
 
     .navbar-nav .nav-item,
