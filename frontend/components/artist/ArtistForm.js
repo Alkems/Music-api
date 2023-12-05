@@ -18,7 +18,7 @@ export default{
             <th>Songs</th>
             <div v-for="song in artistSongs">
                 <!-- add delete button for songlink list -->
-                {{song.name}} - {{song.ArtistSong.role}} <button type="button" @click="unlinkSongFromArtist(song.ArtistSong.id)">Remove</button>
+                {{song.name}} - {{song.ArtistSong.role}} <button type="button" @click="unlinkSong(song.ArtistSong.id)">Remove</button>
             </div>
             <div class="col-auto">
                 <!-- add select list for song id -->
@@ -33,5 +33,11 @@ export default{
     </table>
     `,
     props:["name","country","artistSongs","linkableSongs","newArtistSong","id"],
-    emits:["update:name","update:country"]
+    emits:["update:name","update:country","unlinkSong","addSong"],
+    methods:{
+        unlinkSong(songId){
+            this.$emit("unlinkSong",songId)
+        },
+        linkSong()
+    }
 }
