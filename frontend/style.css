@@ -67,6 +67,110 @@ h2 {
     color: #666;
 }
 
+/* Genres List Styles */
+#genresTable {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    border: none;
+}
+
+#genresTable th,
+#genresTable td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+#genresTable th {
+    font-weight: bold;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+#genresTable td {
+    cursor: pointer;
+    color: #666;
+}
+
+
+/* Albums List Styles */
+#albumsTable {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    border: none;
+}
+
+#albumsTable th,
+#albumsTable td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+#albumsTable th {
+    font-weight: bold;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+#albumsTable td {
+    cursor: pointer;
+    color: #666;
+}
+
+/* ArtistSongs List Styles */
+#artistSongsTable {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    border: none;
+}
+
+#artistSongsTable th,
+#artistSongsTable td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+#artistSongsTable th {
+    font-weight: bold;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+#artistSongsTable td {
+    cursor: pointer;
+    color: #666;
+}
+
+/* songAlbums List Styles */
+#songAlbumTable {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    border: none;
+}
+
+#songAlbumTable th,
+#songAlbumTable td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+#songAlbumTable th {
+    font-weight: bold;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+#songAlbumTable td {
+    cursor: pointer;
+    color: #666;
+}
 
 /* Modal Styles */
 .modal {
