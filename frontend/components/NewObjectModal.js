@@ -15,8 +15,8 @@ export default{
                     <div class="row">
                         <div class="col me-auto"></div>
                         <div class="col-auto">
-                            <button type="button" class="btn btn-success mx-2" @click="$emit('save')">Save</button>
-                            <button type="button" class="btn btn-secondary" @click="cancelSaving">Cancel</button>
+                            <button type="button" class="btn btn-success mx-2" @click="$emit('save')">Create</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                         </div>
                     </div>
                 </div>
