@@ -1,0 +1,386 @@
+/* General Styles */
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #fff;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    color: #000000;
+    font-family: 'Black Ops One';
+    text-align: center;
+    margin-top: 20px;
+    font-weight: normal;
+}
+
+/* Artists List Styles */
+#artistsTable {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    border: none;
+}
+
+#artistsTable th,
+#artistsTable td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+#artistsTable th {
+    font-weight: bold;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+#artistsTable td {
+    cursor: pointer;
+    color: #666;
+}
+
+/* Songs List Styles */
+#songsTable {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    border: none;
+}
+
+#songsTable th,
+#songsTable td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+#songsTable th {
+    font-weight: bold;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+#songsTable td {
+    cursor: pointer;
+    color: #666;
+}
+
+/* Genres List Styles */
+#genresTable {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    border: none;
+}
+
+#genresTable th,
+#genresTable td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+#genresTable th {
+    font-weight: bold;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+#genresTable td {
+    cursor: pointer;
+    color: #666;
+}
+
+
+/* Albums List Styles */
+#albumsTable {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    border: none;
+}
+
+#albumsTable th,
+#albumsTable td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+#albumsTable th {
+    font-weight: bold;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+#albumsTable td {
+    cursor: pointer;
+    color: #666;
+}
+
+/* ArtistSongs List Styles */
+#artistSongsTable {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    border: none;
+}
+
+#artistSongsTable th,
+#artistSongsTable td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+#artistSongsTable th {
+    font-weight: bold;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+#artistSongsTable td {
+    cursor: pointer;
+    color: #666;
+}
+
+/* songAlbums List Styles */
+#songAlbumTable {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    border: none;
+}
+
+#songAlbumTable th,
+#songAlbumTable td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+#songAlbumTable th {
+    font-weight: bold;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+#songAlbumTable td {
+    cursor: pointer;
+    color: #666;
+}
+
+/* Modal Styles */
+.modal {
+    font-size: 0.9rem;
+}
+
+.modal-dialog {
+    max-width: 600px;
+    margin: 30px auto;
+}
+
+.modal-content {
+    border-radius: 5px;
+}
+
+.modal-header,
+.modal-footer {
+    border-bottom: 1px solid #eee;
+    border-top: 1px solid #eee;
+    background-color: #f8f8f8;
+}
+
+.modal-body {
+    padding: 20px;
+    background-color: #fff;
+}
+
+.modal-body table {
+    width: 100%;
+}
+
+.modal-body table th,
+.modal-body table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+.modal-body table th {
+    text-align: left;
+    background-color: #f9f9f9;
+}
+
+.btn {
+    margin: 10px;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: rgb(0, 0, 0);
+    background-color: #007bff;
+}
+
+.btn-outline-success {
+    --bs-btn-color: white;
+    --bs-btn-border-color: white;
+    --bs-btn-hover-color: white;
+    --bs-btn-hover-bg: white;
+    --bs-btn-hover-border-color: white;
+    --bs-btn-focus-shadow-rgb: white;
+    --bs-btn-active-color: rgb(145, 135, 202);
+    --bs-btn-active-bg: white;
+
+    --bs-gradient: none;
+
+    /* Additional styling to override Bootstrap defaults */
+    color: white;
+    border-color: white;
+    background-color: transparent; /* Set the background to transparent for outline buttons */
+
+    &:hover {
+        color: rgb(19, 4, 46);
+        background-color: white;
+        border-color: white;
+    }
+
+    &:focus, &:active {
+        box-shadow: 0 0 0 0.25rem rgba(white, 0.5); /* Adjust the alpha value as needed */
+    }
+}
+
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn-success {
+    background-color: #5f61d1;
+    color: white;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    color: white;
+}
+
+.btn-close {
+    float: right;
+}
+
+
+
+/* Navbar Styles */
+.navbar {
+    background-color: #071b30;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 5px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar-toggler {
+    display: none;
+}
+
+.navbar-brand {
+    padding: 5px 10px;
+    color: #fff;
+    margin-right: 10px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.nav-item {
+    margin-right: 10px;
+}
+
+.navbar-collapse {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.logo {
+    font-family: 'Black Ops One';
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.nav-link {
+    padding: 5px 10px;
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-link:hover {
+    color: #acacac;
+}
+
+.navbar-brand:hover {
+    color: #acacac;
+}
+
+/* Search Form Adjustments */
+.form-control {
+    margin-left: 275px;
+    padding: 5px 10px;
+}
+
+.d-flex {
+    display: flex;
+    align-items: center;
+}
+
+.router-link-exact-active {
+    color: #2785b1;
+}
+
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link:focus,
+.navbar-nav .nav-link:active
+.navbar-nav .navbar-brand.active,
+.navbar-nav .navbar-brand:focus,
+.navbar-nav .navbar-brand:active {
+    color: #2785b1 !important;
+    background-color: transparent !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .navbar-nav,
+    .d-flex {
+        display: block;
+    }
+
+    .navbar-nav .nav-item,
+    .d-flex .form-control,
+    .d-flex .btn {
+        margin-bottom: 5px;
+    }
+}
