@@ -1,4 +1,6 @@
 import confirmationModal from "../ConfirmationModal.js"
+import artistDetails from "./ArtistDetails.js"
+import artistForm from "./ArtistForm.js"
 export default {
     /*html*/
     template: `
@@ -9,38 +11,8 @@ export default {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <table class="table table-striped">
-                    <tr>
-                        <th>Id</th>
-                        <td>{{artistInModal.id}}</td>
-                    </tr>
-                    <tr>
-                        <th>Name</th>
-                        <td v-if="isEditing"><input type="text" v-model="modifiedArtist.name"></td>
-                        <td v-else>{{artistInModal.name}}</td>
-                    </tr>
-                    <tr>
-                        <th>Country</th>
-                        <td v-if="isEditing"><input type="text" v-model="modifiedArtist.country"></td>
-                        <td v-else>{{artistInModal.country}}</td>
-                    </tr>
-                    <tr>
-                        <th>Songs</th>
-                        <div v-for="song in artistSongs">
-                            <!-- add delete button for songlink list -->
-                            {{song.name}} - {{song.ArtistSong.role}} <button v-if="isEditing" type="button" @click="unlinkSongFromArtist(song.ArtistSong.id)">Remove</button>
-                        </div>
-                        <div class="col-auto" v-if="isEditing">
-                            <!-- add select list for song id -->
-                            <select v-model="newArtistSong.SongId">
-                                <option disabled value="">Select a song</option>
-                                <option v-for="song in linkableSongs" :value="song.id">{{song.name}}</option>
-                            </select>
-                            <input type="text" v-model="newArtistSong.role" placeholder="Role">
-                            <button type="button" @click="linkSongToArtist">Add</button>
-                        </div>
-                    </tr>
-                </table>
+                <artist-form v-if="isEditing" v-model:name="modifiedArtist.name" v-model:country="modifiedArtist.country" v-model:artistSongs="artistSongs" v-model:linkableSongs="linkableSongs" v-model:newArtistSong="newArtistSong"/>
+                <artist-details v-else v-model:artistInModal="artistInModal" v-model:artistSongs="artistSongs"/>
             </div>
             <div class="modal-footer">
                 <div class="container">
@@ -70,7 +42,9 @@ export default {
 <confirmation-modal :target="'#artistInfoModal'" @confirmed="deleteArtist" @canceldelete="cancelEditing"></confirmation-modal>
     `,
     components: {
-        confirmationModal
+        confirmationModal,
+        artistDetails,
+        artistForm
     },
     emits:["artistUpdated"],
     props: {
