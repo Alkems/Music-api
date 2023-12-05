@@ -1,4 +1,6 @@
-import confirmationModal from "./ConfirmationModal.js"
+import confirmationModal from "../ConfirmationModal.js"
+import albumForm from "./AlbumForm.js"
+import albumDetails from "./AlbumDetails.js"
 export default {
     /*html*/
     template: `
@@ -9,23 +11,8 @@ export default {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <table class="table table-striped">
-                    <tr>
-                        <th>Id</th>
-                        <td>{{albumInModal.id}}</td>
-                    </tr>
-                    <tr>
-                        <th>Name</th>
-                        <td v-if="isEditing"><input type="text" v-model="modifiedAlbum.name"></td>
-                        <td v-else>{{albumInModal.name}}</td>
-                    </tr>
-                    <tr>
-                        <th>Songs</th>
-                        <div v-for="song in songs">
-                            {{song.SongAlbum.track_number}} - {{song.name}}
-                        </div>
-                    </tr>
-                </table>
+                <album-form v-if="isEditing"  v-model:id="modifiedAlbum.id" v-model:name="modifiedAlbum.name"></album-form>
+                <album-details v-else v-model:albumInModal="albumInModal" v-model:songs="songs"></album-details>
             </div>
             <div class="modal-footer">
                 <div class="container">
@@ -55,7 +42,9 @@ export default {
 <confirmation-modal :target="'#albumInfoModal'" @confirmed="deleteAlbum" @canceldelete="cancelEditing"></confirmation-modal>
     `,
     components: {
-        confirmationModal
+        confirmationModal,
+        albumForm,
+        albumDetails
     },
     emits:["albumUpdated"],
     props: {
