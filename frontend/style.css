@@ -8,7 +8,7 @@ body {
 }
 
 h2 {
-    color: #333;
+    color: #000000;
     font-family: 'Black Ops One';
     text-align: center;
     margin-top: 20px;
@@ -232,7 +232,7 @@ h2 {
 }
 
 .btn-success {
-    background-color: #28a745;
+    background-color: #5f61d1;
     color: white;
 }
 
@@ -320,6 +320,17 @@ h2 {
 .d-flex {
     display: flex;
     align-items: center;
+}
+
+.router-link-exact-active {
+    color: #2785b1;
+}
+
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link:focus,
+.navbar-nav .nav-link:active {
+    color: #2785b1 !important;
+    background-color: transparent !important;
 }
 
 /* Responsive adjustments */
