@@ -27,17 +27,19 @@ export default{
                     <option v-for="song in linkableSongs" :value="song.id">{{song.name}}</option>
                 </select>
                 <input type="text" v-model="newArtistSong.role" placeholder="Role">
-                <button type="button" @click="linkSongToArtist">Add</button>
+                <button type="button" @click="linkSong">Add</button>
             </div>
         </tr>
     </table>
     `,
     props:["name","country","artistSongs","linkableSongs","newArtistSong","id"],
-    emits:["update:name","update:country","unlinkSong","addSong"],
+    emits:["update:name","update:country","unlinkSong","linkSong"],
     methods:{
         unlinkSong(songId){
             this.$emit("unlinkSong",songId)
         },
-        linkSong()
+        linkSong(){
+            this.$emit("linkSong")
+        }
     }
 }

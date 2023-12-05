@@ -12,7 +12,7 @@ export default {
             </div>
             <div class="modal-body">
                 <artist-form v-if="isEditing" v-model:name="modifiedArtist.name" v-model:country="modifiedArtist.country" v-model:artistSongs="artistSongs" v-model:linkableSongs="linkableSongs" v-model:newArtistSong="newArtistSong"
-                @unlinkSong="unlinkSongFromArtist"/>
+                @unlinkSong="unlinkSongFromArtist" @linkSong="linkSongToArtist"/>
                 <artist-details v-else v-model:artistInModal="artistInModal" v-model:artistSongs="artistSongs"/>
             </div>
             <div class="modal-footer">
