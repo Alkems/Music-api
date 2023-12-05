@@ -53,7 +53,7 @@ export default {
     data() {
         return{
             isEditing: false,
-            modifiedAlbum:{id:0,name:""},
+            modifiedAlbum:{},
             songs: []
         }
     },
