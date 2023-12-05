@@ -1,15 +1,18 @@
 /* General Styles */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #fff;
+    color: #333;
     margin: 0;
     padding: 0;
 }
 
 h2 {
     color: #333;
+    font-family: 'Black Ops One';
     text-align: center;
     margin-top: 20px;
+    font-weight: normal;
 }
 
 /* Artists List Styles */
@@ -17,21 +20,51 @@ h2 {
     width: 80%;
     margin: 20px auto;
     border-collapse: collapse;
+    border: none;
 }
 
 #artistsTable th,
 #artistsTable td {
-    padding: 10px;
+    padding: 15px;
     text-align: left;
-    border: 1px solid #ddd;
+    border-bottom: 1px solid #eee;
 }
 
 #artistsTable th {
-    background-color: #f0f0f0;
+    font-weight: bold;
+    background-color: #f9f9f9;
+    color: #333;
 }
 
 #artistsTable td {
     cursor: pointer;
+    color: #666;
+}
+
+/* Songs List Styles */
+#songsTable {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    border: none;
+}
+
+#songsTable th,
+#songsTable td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+#songsTable th {
+    font-weight: bold;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+#songsTable td {
+    cursor: pointer;
+    color: #666;
 }
 
 
