@@ -11,8 +11,8 @@ export default {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <song-form v-if="isEditing" v-model:id="modifiedSong.id" v-model:name="modifiedSong.name" v-model:genreid="modifiedSong.GenreId" v-model:genres="genres" v-mode:formattedDate="formattedDate"/>
-                <song-details v-else v-model:modifiedSong="modifiedSong" v-model:genreName="genreName" />
+                <song-form v-if="isEditing" v-model:id="modifiedSong.id" v-model:name="modifiedSong.name" v-model:genreid="modifiedSong.GenreId" v-model:date_published="formattedDate"/>
+                <song-details v-else v-model:modifiedSong="songInModal" v-model:genreName="genreName" v-model:albums="albums"/>
             </div>
             <div class="modal-footer">
                 <div class="container">

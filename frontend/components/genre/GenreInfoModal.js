@@ -1,4 +1,6 @@
 import confirmationModal from "../ConfirmationModal.js"
+import genreDetails from "./GenreDetails.js";
+import genreForm from "./GenreForm.js";
 export default {
     /*html*/
     template: `
@@ -9,21 +11,8 @@ export default {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <table class="table table-striped">
-                    <tr>
-                        <th>Id</th>
-                        <td>{{genreInModal.id}}</td>
-                    </tr>
-                    <tr>
-                        <th>Name</th>
-                        <td v-if="isEditing"><input type="text" v-model="modifiedGenre.name"></td>
-                        <td v-else>{{genreInModal.name}}</td>
-                    </tr>
-                    <tr>
-                        <th>Songs</th>
-                        <td v-for="song in songs">{{song.name}}</td>
-                    </tr>
-                </table>
+                <genre-form v-if="isEditing" v-model:name="modifiedGenre.name" v-model:id="modifiedGenre.id" />
+                <genre-details v-else v-model:genreInModal="genreInModal" v-model:songs="songs" />
             </div>
             <div class="modal-footer">
                 <div class="container">
@@ -53,7 +42,9 @@ export default {
 <confirmation-modal :target="'#genreInfoModal'" @confirmed="deleteGenre" @canceldelete="cancelEditing"></confirmation-modal>
     `,
     components: {
-        confirmationModal
+        confirmationModal,
+        genreForm,
+        genreDetails,
     },
     emits:["genreUpdated"],
     props: {

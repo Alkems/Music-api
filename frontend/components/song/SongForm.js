@@ -13,20 +13,28 @@ export default{
                     <tr>
                         <th>Genre</th>
                         <td>
-                            <select v-model="genreid">
-                                <option :value="null">No genre</option>
-                                <option v-for="genre in genres" :value="genreid">{{genre.name}}</option>
+                            <select :value="genreid" @input="$emit('update:genreid',$event.target.value)">
+                                <option disabled>Select a genre</option>
+                                <option v-for="genre in genres" :value="genre.id">{{genre.name}}</option>
                             </select>
                         </td>
                     </tr>
                     <tr>
                         <th>Date Published</th>
                         <td>
-                            <input type="date" :value="formattedDate" @input="$emit('update:formattedDate',$event.target.value)">
+                            <input type="date" :value="date_published" @input="$emit('update:date_published',$event.target.value)">
                         </td>
                     </tr>
                 </table>
     `,
-    props: ["id","name","genreid","genres","formattedDate"],
-    emits: ["update:name,update:genreid,update:formattedDate"]
+    props: ["id","name","genreid","date_published"],
+    emits: ["update:name","update:genreid","update:date_published"],
+    async created() {
+        this.genres = await (await fetch(this.API_URL + "/genres")).json()
+    },
+    data() {
+        return{
+            genres:[]
+        }
+    },
 }
