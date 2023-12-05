@@ -1,4 +1,6 @@
 import confirmationModal from "../ConfirmationModal.js"
+import artistSongDetails from "./ArtistSongDetails.js"
+import artistSongForm from "./ArtistSongForm.js"
 export default {
     /*html*/
     template: `
@@ -9,35 +11,8 @@ export default {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <table class="table table-striped">
-                    <tr>
-                        <th>Id</th>
-                        <td>{{artistSongInModal.id}}</td>
-                    </tr>
-                    <tr>
-                        <th>Role</th>
-                        <td v-if="isEditing"><input type="text" v-model="modifiedArtistSong.role"></td>
-                        <td v-else>{{artistSongInModal.role}}</td>
-                    </tr>
-                    <tr>
-                        <th>Artist</th>
-                        <td v-if="isEditing">
-                            <select v-model="modifiedArtistSong.ArtistId">
-                                <option v-for="artist in artists" :value="artist.id">{{artist.name}}</option>
-                            </select>
-                        </td>
-                        <td v-else>{{artistName}}</td>
-                    </tr>
-                    <tr>
-                        <th>Song</th>
-                        <td v-if="isEditing">
-                            <select v-model="modifiedArtistSong.SongId">
-                                <option v-for="song in songs" :value="song.id">{{song.name}}</option>
-                            </select>
-                        </td>
-                        <td v-else>{{songName}}</td>
-                    </tr>
-                </table>
+                <artist-song-form v-if="isEditing" v-model:id="modifiedArtistSong.id" v-model:role="modifiedArtistSong.role" v-model:artistId="modifiedArtistSong.ArtistId" v-model:songId="modifiedArtistSong.SongId" />
+                <artist-song-details v-else v-model:artistSongInModal="artistSongInModal" v-model:artist="artistName" v-model:song="songName"/>
             </div>
             <div class="modal-footer">
                 <div class="container">
@@ -67,7 +42,9 @@ export default {
 <confirmation-modal :target="'#artistSongInfoModal'" @confirmed="deleteArtistSong" @canceldelete="cancelEditing"></confirmation-modal>
     `,
     components: {
-        confirmationModal
+        confirmationModal,
+        artistSongForm,
+        artistSongDetails
     },
     emits:["artistSongUpdated"],
     props: {
