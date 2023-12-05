@@ -1,4 +1,6 @@
-import confirmationModal from "./ConfirmationModal.js"
+import confirmationModal from "../ConfirmationModal.js"
+import songDetails from "./SongDetails.js"
+import songForm from "./SongForm.js"
 export default {
     /*html*/
     template: `
@@ -9,40 +11,8 @@ export default {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <table class="table table-striped">
-                    <tr>
-                        <th>Id</th>
-                        <td>{{songInModal.id}}</td>
-                    </tr>
-                    <tr>
-                        <th>Name</th>
-                        <td v-if="isEditing"><input type="text" v-model="modifiedSong.name"></td>
-                        <td v-else>{{songInModal.name}}</td>
-                    </tr>
-                    <tr>
-                        <th>Genre Id</th>
-                        <td v-if="isEditing">
-                            <select v-model="modifiedSong.GenreId">
-                                <option :value="null">No genre</option>
-                                <option v-for="genre in genres" :value="genre.id">{{genre.name}}</option>
-                            </select>
-                        </td>
-                        <td v-else>{{ genreName }}</td>
-                    </tr>
-                    <tr>
-                        <th>Date Published</th>
-                        <td v-if="isEditing">
-                            <input type="date" v-model="formattedDate">
-                        </td>
-                        <td v-else>
-                            {{ songInModal.date_published }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Albums</th>
-                        <td v-for="album in albums">{{album.name}}</td>
-                    </tr>
-                </table>
+                <song-form v-if="isEditing" v-model:id="modifiedSong.id" v-model:name="modifiedSong.name" v-model:genreid="modifiedSong.GenreId" v-model:genres="genres" v-mode:formattedDate="formattedDate"/>
+                <song-details v-else v-model:modifiedSong="modifiedSong" v-model:genreName="genreName" />
             </div>
             <div class="modal-footer">
                 <div class="container">
@@ -72,7 +42,9 @@ export default {
 <confirmation-modal :target="'#songInfoModal'" @confirmed="deleteSong" @canceldelete="cancelEditing"></confirmation-modal>
     `,
     components: {
-        confirmationModal
+        confirmationModal,
+        songForm,
+        songDetails,
     },
     emits:["songUpdated"],
     props: {
@@ -84,7 +56,6 @@ export default {
             modifiedSong:{},
             genres:[],
             albums:[]
-
         }
     },
     watch: {

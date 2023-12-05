@@ -1,4 +1,4 @@
-import confirmationModal from "./ConfirmationModal.js"
+import confirmationModal from "../ConfirmationModal.js"
 export default {
     /*html*/
     template: `

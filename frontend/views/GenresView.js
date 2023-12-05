@@ -1,5 +1,5 @@
-import genresList from "../components/GenresList.js"
-import genreInfoModal from "../components/GenreInfoModal.js"
+import genresList from "../components/genre/GenresList.js"
+import genreInfoModal from "../components/genre/GenreInfoModal.js"
 export default {
     /*html*/
     template: `

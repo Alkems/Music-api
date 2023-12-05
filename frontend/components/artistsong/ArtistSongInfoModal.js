@@ -1,8 +1,8 @@
-import confirmationModal from "./ConfirmationModal.js"
+import confirmationModal from "../ConfirmationModal.js"
 export default {
     /*html*/
     template: `
-<div id="songAlbumInfoModal" class="modal" tabindex="-1">
+<div id="artistSongInfoModal" class="modal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -12,26 +12,26 @@ export default {
                 <table class="table table-striped">
                     <tr>
                         <th>Id</th>
-                        <td>{{songAlbumInModal.id}}</td>
+                        <td>{{artistSongInModal.id}}</td>
                     </tr>
                     <tr>
-                        <th>Track Number</th>
-                        <td v-if="isEditing"><input type="number" v-model="modifiedSongAlbum.track_number"></td>
-                        <td v-else>{{songAlbumInModal.track_number}}</td>
+                        <th>Role</th>
+                        <td v-if="isEditing"><input type="text" v-model="modifiedArtistSong.role"></td>
+                        <td v-else>{{artistSongInModal.role}}</td>
                     </tr>
                     <tr>
-                        <th>Album</th>
+                        <th>Artist</th>
                         <td v-if="isEditing">
-                            <select v-model="modifiedSongAlbum.AlbumId">
-                                <option v-for="album in albums" :value="album.id">{{album.name}}</option>
+                            <select v-model="modifiedArtistSong.ArtistId">
+                                <option v-for="artist in artists" :value="artist.id">{{artist.name}}</option>
                             </select>
                         </td>
-                        <td v-else>{{albumName}}</td>
+                        <td v-else>{{artistName}}</td>
                     </tr>
                     <tr>
                         <th>Song</th>
                         <td v-if="isEditing">
-                            <select v-model="modifiedSongAlbum.SongId">
+                            <select v-model="modifiedArtistSong.SongId">
                                 <option v-for="song in songs" :value="song.id">{{song.name}}</option>
                             </select>
                         </td>
@@ -47,7 +47,7 @@ export default {
                                 <button type="button" class="btn btn-danger" data-bs-target="#confirmationModal" data-bs-toggle="modal">Delete</button>
                             </div>
                             <div class="col-auto">
-                                <button type="button" class="btn btn-success mx-2" @click="saveModifiedSongAlbum">Save</button>
+                                <button type="button" class="btn btn-success mx-2" @click="saveModifiedArtistSong">Save</button>
                                 <button type="button" class="btn btn-secondary" @click="cancelEditing">Cancel</button>
                             </div>
                         </template>
@@ -64,71 +64,71 @@ export default {
         </div>
     </div>
 </div>
-<confirmation-modal :target="'#songAlbumInfoModal'" @confirmed="deleteSongAlbum" @canceldelete="cancelEditing"></confirmation-modal>
+<confirmation-modal :target="'#artistSongInfoModal'" @confirmed="deleteArtistSong" @canceldelete="cancelEditing"></confirmation-modal>
     `,
     components: {
         confirmationModal
     },
-    emits:["songAlbumUpdated"],
+    emits:["artistSongUpdated"],
     props: {
-        songAlbumInModal: {}
+        artistSongInModal: {}
     },
     computed: {
-        albumName:{
+        artistName:{
             get(){
-                const album = this.albums.find(album => album.id == this.songAlbumInModal.AlbumId)
-                if(album) return album.name
+                const artist = this.artists.find(artist => artist.id == this.artistSongInModal.ArtistId)
+                if(artist) return artist.name
                 return "";
             }
         },
         songName:{
             get(){
-                const song = this.songs.find(song => song.id == this.songAlbumInModal.SongId)
+                const song = this.songs.find(song => song.id == this.artistSongInModal.SongId)
                 if(song) return song.name
                 return "";
             }
         }
     },
     async created() {
+        this.artists = await (await fetch(this.API_URL + "/artists")).json()
         this.songs = await (await fetch(this.API_URL + "/songs")).json()
-        this.albums = await (await fetch(this.API_URL + "/albums")).json()
     },
     data() {
         return{
             isEditing: false,
-            modifiedSongAlbum:{},
-            albums: [],
+            modifiedArtistSong:{},
+            artists: [],
             songs: []
         }
     },
     methods: {
         startEditing(){
-            this.modifiedSongAlbum = {...this.songAlbumInModal}
+            this.modifiedArtistSong = {...this.artistSongInModal}
             this.isEditing = true
         },
         cancelEditing(){
             this.isEditing = false
         },
-        async saveModifiedSongAlbum(){
-            console.log("Saving:", this.modifiedSongAlbum)
-            const rawResponse = await fetch(this.API_URL + "/songAlbums/" + this.modifiedSongAlbum.id, {
+        async saveModifiedArtistSong(){
+            console.log("Saving:", this.modifiedArtistSong)
+            const rawResponse = await fetch(this.API_URL + "/artistSongs/" + this.modifiedArtistSong.id, {
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(this.modifiedSongAlbum)
+                body: JSON.stringify(this.modifiedArtistSong)
             });
             console.log(rawResponse);
-            this.$emit("songAlbumUpdated", this.modifiedSongAlbum)
+            this.$emit("artistSongUpdated", this.modifiedArtistSong)
             this.isEditing = false
         },
-        deleteSongAlbum(){
-            console.log("Deleting:", this.songAlbumInModal);
-            fetch(this.API_URL + "/songAlbums/" + this.songAlbumInModal.id, {
+        deleteArtistSong(){
+            console.log("Deleting:", this.artistSongInModal)
+            fetch(this.API_URL + "/artistSongs/" + this.artistSongInModal.id, {
                 method: 'DELETE'
             });
-            this.$emit("songAlbumUpdated", {})
+            this.$emit("artistSongUpdated", {})
             this.isEditing = false
         }
     }
