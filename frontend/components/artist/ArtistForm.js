@@ -8,17 +8,17 @@ export default{
         </tr>
         <tr>
             <th>Name</th>
-            <td><input type="text" v-model="name"></td>
+            <td><input type="text" :value="name" @input="$emit('update:name',$event.target.value)"></td>
         </tr>
         <tr>
             <th>Country</th>
-            <td><input type="text" v-model="country"></td>
+            <td><input type="text" :value="country" @input="$emit('update:country',$event.target.value)"></td>
         </tr>
-        <tr>
+        <tr v-if="isEditing">
             <th>Songs</th>
             <div v-for="song in artistSongs">
                 <!-- add delete button for songlink list -->
-                {{song.name}} - {{song.ArtistSong.role}} <button type="button" @click="unlinkSong(song.ArtistSong.id)">Remove</button>
+                {{song.name}} - {{song.ArtistSong.role}} <button type="button" @click="this.$emit('unlinkSong',song.id)">Remove</button>
             </div>
             <div class="col-auto">
                 <!-- add select list for song id -->
@@ -27,19 +27,11 @@ export default{
                     <option v-for="song in linkableSongs" :value="song.id">{{song.name}}</option>
                 </select>
                 <input type="text" v-model="newArtistSong.role" placeholder="Role">
-                <button type="button" @click="linkSong">Add</button>
+                <button type="button" @click="this.$emit('linkSong')">Add</button>
             </div>
         </tr>
     </table>
     `,
-    props:["name","country","artistSongs","linkableSongs","newArtistSong","id"],
-    emits:["update:name","update:country","unlinkSong","linkSong"],
-    methods:{
-        unlinkSong(songId){
-            this.$emit("unlinkSong",songId)
-        },
-        linkSong(){
-            this.$emit("linkSong")
-        }
-    }
+    props:["name","country","artistSongs","linkableSongs","newArtistSong","id","isEditing"],
+    emits:["update:name","update:country","unlinkSong","linkSong"]
 }
