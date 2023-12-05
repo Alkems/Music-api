@@ -230,7 +230,7 @@ h2 {
     --bs-btn-hover-bg: white;
     --bs-btn-hover-border-color: white;
     --bs-btn-focus-shadow-rgb: white;
-    --bs-btn-active-color: white;
+    --bs-btn-active-color: rgb(145, 135, 202);
     --bs-btn-active-bg: white;
 
     --bs-gradient: none;
@@ -247,7 +247,7 @@ h2 {
     }
 
     &:focus, &:active {
-        box-shadow: 0 0 0 0.25rem rgba(yourFocusShadowColor, 0.5); /* Adjust the alpha value as needed */
+        box-shadow: 0 0 0 0.25rem rgba(white, 0.5); /* Adjust the alpha value as needed */
     }
 }
 
