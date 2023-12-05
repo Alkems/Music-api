@@ -18,7 +18,7 @@ export default{
             <th>Songs</th>
             <div v-for="song in artistSongs">
                 <!-- add delete button for songlink list -->
-                {{song.name}} - {{song.ArtistSong.role}} <button type="button" @click="this.$emit('unlinkSong',song.id)">Remove</button>
+                {{song.name}} - {{song.ArtistSong.role}} <button type="button" @click="this.$emit('unlinkSong',song.ArtistSong.id)">Remove</button>
             </div>
             <div class="col-auto">
                 <!-- add select list for song id -->
