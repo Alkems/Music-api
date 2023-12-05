@@ -8,6 +8,7 @@ import GenresView from './views/GenresView.js'
 import AlbumsView from './views/AlbumsView.js'
 import ArtistSongsView from './views/ArtistSongsView.js'
 import SongAlbumsView from './views/SongAlbumsView.js'
+import HomeView from './views/HomeView.js'
 
 const routes = [
     { path: "/artists", component: ArtistsView },
@@ -16,6 +17,7 @@ const routes = [
     { path: "/albums", component: AlbumsView },
     { path: "/artistsongs", component: ArtistSongsView },
     { path: "/songalbums", component: SongAlbumsView },
+    { path: "/", component: HomeView}
 ]
 
 const router = createRouter({
