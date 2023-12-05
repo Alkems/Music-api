@@ -1,4 +1,5 @@
-import confirmationModal from "./ConfirmationModal.js"
+import confirmationModal from "../ConfirmationModal.js"
+import albumForm from "./AlbumForm.js"
 export default {
     /*html*/
     template: `
@@ -9,6 +10,7 @@ export default {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <album-form v-model:id="modifiedAlbum.id" v-model:name="modifiedAlbum.name"></album-form>
                 <table class="table table-striped">
                     <tr>
                         <th>Id</th>
@@ -19,6 +21,7 @@ export default {
                         <td v-if="isEditing"><input type="text" v-model="modifiedAlbum.name"></td>
                         <td v-else>{{albumInModal.name}}</td>
                     </tr>
+
                     <tr>
                         <th>Songs</th>
                         <div v-for="song in songs">
@@ -55,7 +58,8 @@ export default {
 <confirmation-modal :target="'#albumInfoModal'" @confirmed="deleteAlbum" @canceldelete="cancelEditing"></confirmation-modal>
     `,
     components: {
-        confirmationModal
+        confirmationModal,
+        albumForm
     },
     emits:["albumUpdated"],
     props: {
@@ -64,7 +68,7 @@ export default {
     data() {
         return{
             isEditing: false,
-            modifiedAlbum:{},
+            modifiedAlbum:{id:0,name:""},
             songs: []
         }
     },

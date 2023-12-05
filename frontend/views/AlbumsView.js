@@ -1,5 +1,5 @@
-import albumsList from "../components/AlbumsList.js"
-import albumInfoModal from "../components/AlbumInfoModal.js"
+import albumsList from "../components/album/AlbumsList.js"
+import albumInfoModal from "../components/album/AlbumInfoModal.js"
 export default {
     /*html*/
     template: `
