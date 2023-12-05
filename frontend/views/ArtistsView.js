@@ -1,5 +1,5 @@
-import artistsList from "../components/ArtistsList.js"
-import artistInfoModal from "../components/ArtistInfoModal.js"
+import artistsList from "../components/artist/ArtistsList.js"
+import artistInfoModal from "../components/artist/ArtistInfoModal.js"
 export default {
     /*html*/
     template: `
