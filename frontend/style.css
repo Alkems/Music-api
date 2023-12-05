@@ -342,6 +342,10 @@ h2 {
     color: #acacac;
 }
 
+.navbar-brand:hover {
+    color: #acacac;
+}
+
 /* Search Form Adjustments */
 .form-control {
     margin-left: 275px;
@@ -359,7 +363,10 @@ h2 {
 
 .navbar-nav .nav-link.active,
 .navbar-nav .nav-link:focus,
-.navbar-nav .nav-link:active {
+.navbar-nav .nav-link:active
+.navbar-nav .navbar-brand.active,
+.navbar-nav .navbar-brand:focus,
+.navbar-nav .navbar-brand:active {
     color: #2785b1 !important;
     background-color: transparent !important;
 }
