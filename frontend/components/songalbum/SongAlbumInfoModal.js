@@ -1,4 +1,6 @@
 import confirmationModal from "../ConfirmationModal.js"
+import songAlbumDetails from "./SongAlbumDetails.js"
+import songAlbumForm from "./SongAlbumForm.js"
 export default {
     /*html*/
     template: `
@@ -9,35 +11,8 @@ export default {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <table class="table table-striped">
-                    <tr>
-                        <th>Id</th>
-                        <td>{{songAlbumInModal.id}}</td>
-                    </tr>
-                    <tr>
-                        <th>Track Number</th>
-                        <td v-if="isEditing"><input type="number" v-model="modifiedSongAlbum.track_number"></td>
-                        <td v-else>{{songAlbumInModal.track_number}}</td>
-                    </tr>
-                    <tr>
-                        <th>Album</th>
-                        <td v-if="isEditing">
-                            <select v-model="modifiedSongAlbum.AlbumId">
-                                <option v-for="album in albums" :value="album.id">{{album.name}}</option>
-                            </select>
-                        </td>
-                        <td v-else>{{albumName}}</td>
-                    </tr>
-                    <tr>
-                        <th>Song</th>
-                        <td v-if="isEditing">
-                            <select v-model="modifiedSongAlbum.SongId">
-                                <option v-for="song in songs" :value="song.id">{{song.name}}</option>
-                            </select>
-                        </td>
-                        <td v-else>{{songName}}</td>
-                    </tr>
-                </table>
+                <song-album-form v-if="isEditing" v-model:track_number="modifiedSongAlbum.track_number" v-model:songId="modifiedSongAlbum.SongId" v-model:albumId="modifiedSongAlbum.AlbumId" v-model:id="modifiedSongAlbum.Id"/>
+                <song-album-details v-else v-model:songAlbumInModal="songAlbumInModal" v-model:song="songName" v-model:album="albumName"/>
             </div>
             <div class="modal-footer">
                 <div class="container">
@@ -67,7 +42,9 @@ export default {
 <confirmation-modal :target="'#songAlbumInfoModal'" @confirmed="deleteSongAlbum" @canceldelete="cancelEditing"></confirmation-modal>
     `,
     components: {
-        confirmationModal
+        confirmationModal,
+        songAlbumDetails,
+        songAlbumForm
     },
     emits:["songAlbumUpdated"],
     props: {
